@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Discover My Setup</title>
+<title>iZeni • Discover My Setup</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -23,7 +23,7 @@ background:
 linear-gradient(
 180deg,
 #ff8a1d 0%,
-#ff6a00 50%,
+#ff6a00 48%,
 #eb5200 100%
 );
 
@@ -33,9 +33,10 @@ display:flex;
 justify-content:center;
 align-items:center;
 
-padding:20px;
+padding:18px;
 
 color:white;
+overflow-x:hidden;
 }
 
 .container{
@@ -50,9 +51,10 @@ max-width:430px;
 display:flex;
 align-items:center;
 justify-content:center;
+
 gap:0px;
 
-margin-bottom:18px;
+margin-bottom:22px;
 
 position:relative;
 }
@@ -61,38 +63,36 @@ position:relative;
 
 position:absolute;
 
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 
-background:rgba(255,255,255,0.16);
+background:rgba(255,255,255,0.14);
 
 border-radius:50%;
 
-filter:blur(40px);
+filter:blur(42px);
 
-top:-10px;
+top:-12px;
 }
 
 .ai-name{
 
-font-size:28px;
+font-size:30px;
 
-font-weight:800;
+font-weight:900;
 
-letter-spacing:-1px;
+letter-spacing:-1.2px;
 
 position:relative;
 
 z-index:2;
-
-line-height:1;
 
 margin-right:-2px;
 }
 
 .ai-bot{
 
-width:55px;
+width:58px;
 
 position:relative;
 
@@ -103,7 +103,7 @@ margin-left:-2px;
 animation:floatBot 5s ease-in-out infinite;
 
 filter:
-drop-shadow(0 0 22px rgba(255,255,255,0.28));
+drop-shadow(0 0 20px rgba(255,255,255,0.32));
 }
 
 @keyframes floatBot{
@@ -122,6 +122,8 @@ transform:translateY(0px);
 
 }
 
+/* CARD */
+
 .card{
 
 backdrop-filter:blur(18px);
@@ -129,18 +131,18 @@ backdrop-filter:blur(18px);
 background:
 linear-gradient(
 135deg,
-rgba(255,255,255,0.18),
+rgba(255,255,255,0.16),
 rgba(255,255,255,0.08)
 );
 
-border:1px solid rgba(255,255,255,0.18);
+border:1px solid rgba(255,255,255,0.16);
 
-border-radius:28px;
+border-radius:30px;
 
 padding:30px 24px;
 
 box-shadow:
-0 10px 30px rgba(0,0,0,0.12);
+0 12px 30px rgba(0,0,0,0.12);
 
 animation:fadeUp 0.35s ease;
 }
@@ -160,29 +162,40 @@ transform:translateY(0px);
 }
 
 h1{
-font-size:32px;
-line-height:1.18;
-margin:0 0 12px;
-font-weight:800;
-letter-spacing:-1px;
+
+font-size:38px;
+
+line-height:1.1;
+
+margin:0 0 14px;
+
+font-weight:900;
+
+letter-spacing:-1.5px;
 }
 
 p{
-font-size:15px;
+
+font-size:16px;
+
 opacity:0.92;
+
 line-height:1.6;
+
 margin-bottom:22px;
 }
+
+/* INPUTS */
 
 input{
 
 width:100%;
 
-padding:16px;
+padding:17px;
 
 border:none;
 
-border-radius:16px;
+border-radius:18px;
 
 font-size:16px;
 
@@ -195,11 +208,13 @@ box-sizing:border-box;
 outline:none;
 }
 
+/* BUTTON */
+
 .button{
 
 width:100%;
 
-padding:16px;
+padding:17px;
 
 border:none;
 
@@ -222,6 +237,110 @@ transition:0.3s;
 transform:translateY(-2px);
 }
 
+/* OPTIONS */
+
+.options{
+display:grid;
+gap:12px;
+margin-top:10px;
+}
+
+.option{
+
+padding:17px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,0.12);
+
+border:1px solid rgba(255,255,255,0.12);
+
+cursor:pointer;
+
+transition:0.3s;
+
+font-weight:700;
+
+line-height:1.5;
+}
+
+.option:hover{
+
+background:rgba(255,255,255,0.2);
+
+transform:translateY(-2px);
+}
+
+/* MOBILE */
+
+.mobile-wrap{
+
+display:flex;
+align-items:center;
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+margin-bottom:14px;
+}
+
+.prefix{
+
+padding:17px 14px;
+
+color:#666;
+
+font-weight:700;
+
+font-size:16px;
+
+background:#f5f5f5;
+}
+
+.mobile-input{
+
+border:none;
+margin:0;
+border-radius:0;
+flex:1;
+}
+
+/* RECOMMEND */
+
+.recommend-box{
+
+padding:18px;
+
+border-radius:22px;
+
+background:rgba(255,255,255,0.10);
+
+margin-bottom:22px;
+
+line-height:2;
+font-size:15px;
+}
+
+.secure-note{
+
+font-size:13px;
+
+opacity:0.78;
+
+margin-top:-2px;
+
+margin-bottom:18px;
+
+line-height:1.5;
+}
+
+.hidden{
+display:none;
+}
+
 .error{
 
 font-size:14px;
@@ -230,11 +349,51 @@ margin-top:-4px;
 
 margin-bottom:14px;
 
-opacity:0.92;
+opacity:0.95;
 }
 
-.hidden{
-display:none;
+.next-title{
+
+font-size:15px;
+
+font-weight:700;
+
+margin-top:24px;
+
+margin-bottom:12px;
+
+opacity:0.88;
+}
+
+.next-grid{
+display:grid;
+gap:10px;
+}
+
+.next-card{
+
+padding:15px 16px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,0.10);
+
+border:1px solid rgba(255,255,255,0.10);
+
+font-size:14px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+.next-card:hover{
+
+background:rgba(255,255,255,0.18);
+
+transform:translateY(-2px);
 }
 
 </style>
@@ -276,7 +435,8 @@ placeholder="Enter your full name">
 
 <div class="error" id="nameError"></div>
 
-<button class="button" onclick="saveName()">
+<button class="button"
+onclick="saveName()">
 Continue
 </button>
 
@@ -301,14 +461,290 @@ iZeni
 <h1 id="welcomeTitle"></h1>
 
 <p>
-Your experience is now being personalised ✨
+Are you already banking with ICICI Bank?
 </p>
+
+<div class="options">
+
+<div class="option"
+onclick="existingCustomerJourney()">
+Yes, I already bank with ICICI
+</div>
+
+<div class="option"
+onclick="nextStep(2,3)">
+No, I’m exploring options
+</div>
+
+</div>
+
+</div>
+
+<!-- STEP 3 -->
+
+<div class="card hidden" id="step3">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="salaryTitle"></h1>
+
+<p>
+This helps personalise your banking setup smarter.
+</p>
+
+<div class="options">
+
+<div class="option"
+onclick="saveSalary('PowerPay')">
+Up to ₹1L/month
+</div>
+
+<div class="option"
+onclick="saveSalary('Select')">
+₹1L–3L/month
+</div>
+
+<div class="option"
+onclick="saveSalary('Wealth')">
+₹3L–8L/month
+</div>
+
+<div class="option"
+onclick="saveSalary('Private')">
+₹8L+/month
+</div>
+
+</div>
+
+</div>
+
+<!-- STEP 4 -->
+
+<div class="card hidden" id="step4">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="interestTitle"></h1>
+
+<p>
+What are you looking to unlock next?
+</p>
+
+<div class="options">
+
+<div class="option"
+onclick="saveInterest('Lifestyle')">
+Lifestyle & premium experiences
+</div>
+
+<div class="option"
+onclick="saveInterest('Travel')">
+Travel & international spends
+</div>
+
+<div class="option"
+onclick="saveInterest('Investing')">
+Investments & wealth creation
+</div>
+
+<div class="option"
+onclick="saveInterest('Family')">
+Family & future planning
+</div>
+
+</div>
+
+</div>
+
+<!-- STEP 5 -->
+
+<div class="card hidden" id="step5">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="recommendTitle"></h1>
+
+<p>
+Curated around your lifestyle & financial goals ✨
+</p>
+
+<div
+class="recommend-box"
+id="recommendBox">
+</div>
+
+<p>
+Let’s make your experience even smarter.
+</p>
+
+<div class="mobile-wrap">
+
+<div class="prefix">
++91
+</div>
+
+<input
+type="tel"
+maxlength="10"
+id="mobileInput"
+class="mobile-input"
+placeholder="Mobile number">
+
+</div>
+
+<input
+type="email"
+id="emailInput"
+placeholder="Work email (optional)">
+
+<div class="secure-note">
+Used only to personalise your experience better.
+</div>
+
+<button class="button"
+onclick="submitLead()">
+Continue Exploring
+</button>
+
+</div>
+
+<!-- STEP 6 -->
+
+<div class="card hidden" id="step6">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="finalTitle"></h1>
+
+<p>
+More experiences curated for you ✨
+</p>
+
+<div class="next-title">
+Continue exploring
+</div>
+
+<div class="next-grid">
+
+<div class="next-card"
+onclick="window.location.href='wealth.html'">
+📈 Explore smarter investing
+</div>
+
+<div class="next-card"
+onclick="window.location.href='milestone.html'">
+🏠 Unlock milestone funding
+</div>
+
+<div class="next-card"
+onclick="window.location.href='games.html'">
+🎮 Try interactive experiences
+</div>
+
+<div class="next-card"
+onclick="window.location.href='index.html'">
+✨ Discover more experiences
+</div>
+
+</div>
+
+</div>
+
+<!-- EXISTING CUSTOMER FLOW -->
+
+<div class="card hidden" id="existingFlow">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="existingTitle"></h1>
+
+<p>
+What would you like to enhance today?
+</p>
+
+<div class="options">
+
+<div class="option">
+Upgrade my banking experience
+</div>
+
+<div class="option">
+Explore premium credit cards
+</div>
+
+<div class="option">
+Transfer existing loan
+</div>
+
+<div class="option">
+Grow investments smarter
+</div>
+
+<div class="option">
+Discover iMobile capabilities
+</div>
+
+</div>
 
 </div>
 
 </div>
 
 <script>
+
+let userName = "";
+let salaryType = "";
+let userInterest = "";
 
 function nextStep(current,next){
 
@@ -339,20 +775,183 @@ document.getElementById("nameError")
 return;
 }
 
-/* CLEAR ERROR */
-
 document.getElementById("nameError")
 .innerHTML = "";
 
-/* UPDATE NEXT SCREEN */
+userName = input;
 
 document.getElementById("welcomeTitle")
 .innerHTML =
-`Welcome, ${input} ✨`;
+`Welcome, ${userName} ✨`;
 
-/* CONTINUE FLOW */
+document.getElementById("salaryTitle")
+.innerHTML =
+`${userName}, what’s your monthly salary range?`;
+
+document.getElementById("interestTitle")
+.innerHTML =
+`${userName}, what are you looking to unlock next?`;
 
 nextStep(1,2);
+
+}
+
+function existingCustomerJourney(){
+
+document.getElementById("step2")
+.classList.add("hidden");
+
+document.getElementById("existingTitle")
+.innerHTML =
+`${userName}, let’s elevate your banking experience ✨`;
+
+document.getElementById("existingFlow")
+.classList.remove("hidden");
+}
+
+function saveSalary(type){
+
+salaryType = type;
+
+nextStep(3,4);
+}
+
+function saveInterest(interest){
+
+userInterest = interest;
+
+let recommendations = "";
+
+if(salaryType === "PowerPay"){
+
+recommendations = `
+✓ PowerPay Salary Account<br>
+✓ Rubyx Credit Card<br>
+✓ Amazon Pay Credit Card<br>
+✓ Everyday rewards & spends<br>
+✓ Smart iMobile banking
+`;
+
+}
+
+if(salaryType === "Select"){
+
+recommendations = `
+✓ Select Salary Account<br>
+✓ Rubyx / Sapphiro Credit Card<br>
+✓ Amazon Pay Credit Card<br>
+✓ Lifestyle & travel privileges<br>
+✓ Relationship-based offers
+`;
+
+}
+
+if(salaryType === "Wealth"){
+
+recommendations = `
+✓ Wealth Salary Account<br>
+✓ Sapphiro / Emeralde Card<br>
+✓ 3-in-1 Investment Account<br>
+✓ Wealth servicing benefits<br>
+✓ Premium investment experiences
+`;
+
+}
+
+if(salaryType === "Private"){
+
+recommendations = `
+✓ Private Banking Privileges<br>
+✓ Emeralde Private Metal Card<br>
+✓ Dedicated relationship support<br>
+✓ Bespoke wealth experiences<br>
+✓ Premium lifestyle access
+`;
+
+}
+
+document.getElementById("recommendTitle")
+.innerHTML =
+`${userName}, here’s what fits you best ✨`;
+
+document.getElementById("recommendBox")
+.innerHTML =
+recommendations;
+
+nextStep(4,5);
+
+}
+
+async function submitLead(){
+
+const mobile =
+document.getElementById("mobileInput").value;
+
+const email =
+document.getElementById("emailInput").value;
+
+const regex =
+/^[6-9]\d{9}$/;
+
+if(!regex.test(mobile)){
+
+alert(
+"Please enter a valid Indian mobile number to continue your personalised experience."
+);
+
+return;
+}
+
+/* DUPLICATE DETECTION */
+
+const existingLead =
+localStorage.getItem("izeni_" + mobile);
+
+if(existingLead){
+
+document.getElementById("finalTitle")
+.innerHTML =
+`Welcome back, ${userName} 👋`;
+
+nextStep(5,6);
+
+return;
+}
+
+/* SAVE LEAD */
+
+localStorage.setItem(
+"izeni_" + mobile,
+"true"
+);
+
+/* GOOGLE SHEETS */
+
+const payload = {
+
+name:userName,
+salary:salaryType,
+interest:userInterest,
+mobile:"+91" + mobile,
+email:email
+
+};
+
+/* REPLACE THIS URL */
+
+fetch(
+"https://script.google.com/macros/s/PASTE-YOUR-URL-HERE/exec",
+{
+method:"POST",
+body:JSON.stringify(payload)
+}
+);
+
+document.getElementById("finalTitle")
+.innerHTML =
+`${userName}, your setup is getting smarter ✨`;
+
+nextStep(5,6);
 
 }
 
