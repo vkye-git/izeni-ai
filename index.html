@@ -460,9 +460,26 @@ console.log(data)
 
 removeTyping()
 
-const reply =
-data?.choices?.[0]?.message?.content ||
-"Unable to generate response."
+let reply = "Unable to generate response."
+
+if(
+data.choices &&
+data.choices.length > 0 &&
+data.choices[0].message &&
+data.choices[0].message.content
+){
+
+reply = data.choices[0].message.content
+
+}
+
+if(data.error){
+
+reply =
+data.error.message ||
+JSON.stringify(data.error)
+
+}
 
 addBotMessage(reply)
 
