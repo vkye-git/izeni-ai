@@ -114,155 +114,200 @@ transform:translateY(0px);
 
 }
 
-/* CARDS */
+/* CHAT SHELL */
 
-.cards{
-display:grid;
+.chat-shell{
 
-grid-template-columns:1fr;
-
-gap:16px;
-
-padding:20px;
-
-max-width:820px;
-
+max-width:950px;
 margin:auto;
-
-margin-top:10px;
-
-padding-bottom:60px;
-
+padding:0px 20px 50px;
 position:relative;
-
 z-index:2;
+
 }
 
-/* GLASS CARDS */
-
-.card{
-
-position:relative;
-
-overflow:hidden;
-
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-
-background:
-linear-gradient(
-135deg,
-rgba(255,255,255,0.18),
-rgba(255,255,255,0.08)
-);
-
-border:1px solid rgba(255,255,255,0.18);
-
-border-radius:28px;
-
-padding:22px;
-
-color:white;
-
-text-align:left;
-
-transition:all 0.35s ease;
-
-cursor:pointer;
-
-box-shadow:
-0 8px 30px rgba(0,0,0,0.12);
-
-min-height:105px;
+.chat-window{
 
 display:flex;
 flex-direction:column;
-justify-content:center;
+gap:18px;
+
+margin-top:10px;
+margin-bottom:25px;
+
 }
 
-.card::before{
+/* MESSAGE */
 
-content:"";
+.bot-message,
+.user-message{
 
-position:absolute;
+display:flex;
 
-width:220px;
-height:220px;
-
-background:rgba(255,255,255,0.08);
-
-border-radius:50%;
-
-top:-100px;
-right:-100px;
-
-filter:blur(20px);
 }
 
-.card:hover{
+.bot-message{
+justify-content:flex-start;
+}
 
-transform:
-translateY(-6px)
-scale(1.02);
+.user-message{
+justify-content:flex-end;
+}
+
+.message-bubble{
+
+max-width:78%;
+
+padding:18px 22px;
+
+border-radius:24px;
+
+font-size:16px;
+line-height:1.7;
+
+backdrop-filter:blur(18px);
 
 background:
-linear-gradient(
-135deg,
-rgba(255,255,255,0.24),
-rgba(255,255,255,0.12)
-);
+rgba(255,255,255,0.16);
+
+border:
+1px solid rgba(255,255,255,0.15);
 
 box-shadow:
-0 20px 40px rgba(0,0,0,0.18);
+0 10px 30px rgba(0,0,0,0.10);
+
 }
 
-/* CARD TEXT */
+.user-message .message-bubble{
 
-.card h2{
-margin:0;
-font-size:22px;
+background:white;
+color:#ff6a00;
+
 font-weight:700;
-letter-spacing:-0.5px;
-line-height:1.4;
+
 }
 
-/* FOOTER */
+/* STARTER GRID */
 
-.footer{
+.starter-grid{
 
-text-align:center;
+display:grid;
 
-padding:20px 30px 35px;
+grid-template-columns:1fr 1fr;
 
-font-size:13px;
+gap:16px;
 
-opacity:0.82;
+margin-bottom:28px;
 
-position:relative;
-
-z-index:2;
 }
 
-/* DESKTOP */
+.starter-card{
 
-@media(min-width:768px){
+padding:22px;
 
-.hero{
-padding-top:40px;
+border-radius:24px;
+
+cursor:pointer;
+
+font-weight:700;
+
+line-height:1.5;
+
+backdrop-filter:blur(18px);
+
+background:
+rgba(255,255,255,0.14);
+
+border:
+1px solid rgba(255,255,255,0.15);
+
+transition:0.3s ease;
+
 }
+
+.starter-card:hover{
+
+transform:translateY(-4px);
+
+background:
+rgba(255,255,255,0.22);
+
+}
+
+/* INPUT */
+
+.input-bar{
+
+display:flex;
+gap:14px;
+
+margin-bottom:40px;
+
+}
+
+.input-bar input{
+
+flex:1;
+
+border:none;
+outline:none;
+
+padding:20px;
+
+border-radius:20px;
+
+font-size:16px;
+
+font-family:'Mulish',sans-serif;
+
+}
+
+.input-bar button{
+
+border:none;
+
+padding:0 28px;
+
+border-radius:20px;
+
+background:white;
+
+color:#ff6a00;
+
+font-weight:800;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
 
 .hero h1{
-font-size:92px;
+font-size:56px;
 }
 
 .robot{
-width:250px;
+width:180px;
 }
 
-.cards{
-grid-template-columns:1fr 1fr;
-gap:20px;
-max-width:880px;
+.starter-grid{
+grid-template-columns:1fr;
+}
+
+.message-bubble{
+max-width:90%;
+}
+
+.input-bar{
+flex-direction:column;
+}
+
+.input-bar button{
+height:58px;
 }
 
 }
@@ -293,92 +338,169 @@ Your personalised AI banking companion
 
 </div>
 
-<!-- CARDS -->
+<!-- AI CHAT -->
 
-<div class="cards">
+<div class="chat-shell">
 
-<div class="card"
-onclick="sendPrompt('Let iZeni craft an ideal banking setup')">
+<div class="chat-window" id="chatWindow">
 
-<h2>
+<div class="bot-message">
+
+<div class="message-bubble">
+
+✨ Hi, I’m <strong>iZeni</strong>.
+
+I can help you discover smarter banking setups, premium cards, wealth journeys, travel benefits, fraud awareness games and much more.
+
+What would you like to explore today?
+
+</div>
+
+</div>
+
+</div>
+
+<!-- STARTER CARDS -->
+
+<div class="starter-grid">
+
+<div class="starter-card"
+onclick="sendMessage('Let iZeni craft an ideal banking setup')">
+
 🏦 Let iZeni craft an ideal banking setup
-</h2>
 
 </div>
 
-<div class="card"
-onclick="sendPrompt('Discover better ways to build wealth')">
+<div class="starter-card"
+onclick="sendMessage('Discover better ways to build wealth')">
 
-<h2>
 📈 Discover better ways to build wealth
-</h2>
 
 </div>
 
-<div class="card"
-onclick="sendPrompt('Find your perfect premium card match')">
+<div class="starter-card"
+onclick="sendMessage('Find your perfect premium card match')">
 
-<h2>
 💳 Find your perfect premium card match
-</h2>
 
 </div>
 
-<div class="card"
-onclick="sendPrompt('Make international travel more effortless')">
+<div class="starter-card"
+onclick="sendMessage('Make international travel more effortless')">
 
-<h2>
 ✈️ Make international travel more effortless
-</h2>
 
 </div>
 
-<div class="card"
-onclick="sendPrompt('Put your fraud awareness to the test')">
+<div class="starter-card"
+onclick="sendMessage('Put your fraud awareness to the test')">
 
-<h2>
 🎮 Put your fraud awareness to the test
-</h2>
 
 </div>
 
-<div class="card"
-onclick="sendPrompt('Unlock hidden iMobile capabilities')">
+<div class="starter-card"
+onclick="sendMessage('Unlock hidden iMobile capabilities')">
 
-<h2>
 📱 Unlock hidden iMobile capabilities
-</h2>
 
 </div>
 
 </div>
 
-<!-- FOOTER -->
+<!-- INPUT -->
 
-<div class="footer">
-Powered by iZeni AI Experience
+<div class="input-bar">
+
+<input
+type="text"
+id="userInput"
+placeholder="Ask iZeni anything..."
+onkeypress="handleKey(event)"
+>
+
+<button onclick="submitInput()">
+Send
+</button>
+
 </div>
 
-<!-- BOTPRESS -->
+</div>
 
-<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-
-<script src="https://files.bpcontent.cloud/2026/05/09/14/20260509140531-GOAB7DHN.js"></script>
+<!-- SCRIPT -->
 
 <script>
 
-function sendPrompt(message){
+function addUserMessage(text){
 
-if(window.botpress){
+const chat=document.getElementById('chatWindow');
 
-window.botpress.open();
+chat.innerHTML += `
+<div class="user-message">
+<div class="message-bubble">
+${text}
+</div>
+</div>
+`;
 
-setTimeout(() => {
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:'smooth'
+});
 
-window.botpress.sendMessage(message);
+}
+
+function addBotMessage(text){
+
+const chat=document.getElementById('chatWindow');
+
+chat.innerHTML += `
+<div class="bot-message">
+<div class="message-bubble">
+${text}
+</div>
+</div>
+`;
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:'smooth'
+});
+
+}
+
+function sendMessage(text){
+
+addUserMessage(text);
+
+/* TEMP AI RESPONSE */
+
+setTimeout(()=>{
+
+addBotMessage("✨ iZeni is intelligently building this journey for you.");
 
 },1000);
 
+}
+
+function submitInput(){
+
+const input=document.getElementById('userInput');
+
+if(input.value.trim() !== ''){
+
+sendMessage(input.value);
+
+input.value='';
+
+}
+
+}
+
+function handleKey(e){
+
+if(e.key === 'Enter'){
+submitInput();
 }
 
 }
