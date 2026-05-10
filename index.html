@@ -415,18 +415,57 @@ Send
 
 </div>
 
-<!-- BOTPRESS SDK -->
+<!-- BOTPRESS -->
 
 <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
 
 <script>
 
 window.botpress.init({
-  botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
-  clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8"
+
+botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
+
+clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8",
+
+configuration: {
+
+version: "v2",
+
+botName: "iZeni",
+
+botDescription: "Your personalised AI banking companion",
+
+website: {},
+
+email: {},
+
+phone: {},
+
+termsOfService: {},
+
+privacyPolicy: {},
+
+color: "#F26D21",
+
+variant: "solid",
+
+themeMode: "light",
+
+fontFamily: "Mulish",
+
+radius: 2,
+
+feedbackEnabled: false,
+
+footer: "",
+
+showPoweredBy: false
+
+}
+
 });
 
-/* HIDE DEFAULT CHAT */
+/* HIDE ORIGINAL CHAT */
 
 window.botpress.on("webchat:ready", () => {
 
@@ -482,11 +521,9 @@ behavior:'smooth'
 
 /* SEND MESSAGE */
 
-async function sendMessage(text){
+function sendMessage(text){
 
 addUserMessage(text);
-
-/* LOADING */
 
 const loadingId = "loading-" + Date.now();
 
@@ -500,15 +537,19 @@ chat.innerHTML += `
 </div>
 `;
 
-/* SEND TO AI */
-
 window.botpress.sendMessage(text);
 
-/* LISTEN RESPONSE */
+}
+
+/* RECEIVE AI RESPONSE */
 
 window.botpress.on("message", (message) => {
 
-document.getElementById(loadingId)?.remove();
+const loading = document.querySelector('[id^="loading-"]');
+
+if(loading){
+loading.remove();
+}
 
 if(message.payload && message.payload.text){
 
@@ -517,8 +558,6 @@ addBotMessage(message.payload.text);
 }
 
 });
-
-}
 
 /* INPUT */
 
