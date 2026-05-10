@@ -63,14 +63,14 @@ padding:30px 24px;
 box-shadow:
 0 10px 30px rgba(0,0,0,0.12);
 
-animation:fadeUp 0.4s ease;
+animation:fadeUp 0.35s ease;
 }
 
 @keyframes fadeUp{
 
 from{
 opacity:0;
-transform:translateY(16px);
+transform:translateY(14px);
 }
 
 to{
@@ -81,18 +81,22 @@ transform:translateY(0px);
 }
 
 h1{
-font-size:34px;
-line-height:1.15;
+font-size:32px;
+line-height:1.18;
 margin:0 0 12px;
 font-weight:800;
 letter-spacing:-1px;
 }
 
 p{
-font-size:16px;
+font-size:15px;
 opacity:0.92;
 line-height:1.6;
-margin-bottom:24px;
+margin-bottom:22px;
+}
+
+.ai{
+font-weight:800;
 }
 
 input{
@@ -109,7 +113,7 @@ font-size:16px;
 
 font-family:'Mulish',sans-serif;
 
-margin-bottom:16px;
+margin-bottom:14px;
 
 box-sizing:border-box;
 
@@ -163,6 +167,8 @@ cursor:pointer;
 transition:0.3s;
 
 font-weight:600;
+
+line-height:1.5;
 }
 
 .option:hover{
@@ -190,7 +196,7 @@ padding:16px 14px;
 color:#666;
 font-weight:700;
 font-size:16px;
-background:#f5f5f5;
+background:#f4f4f4;
 }
 
 .mobile-input{
@@ -198,14 +204,6 @@ border:none;
 margin:0;
 border-radius:0;
 flex:1;
-}
-
-.secure-note{
-font-size:13px;
-opacity:0.78;
-margin-top:-2px;
-margin-bottom:18px;
-line-height:1.5;
 }
 
 .recommend-box{
@@ -221,12 +219,20 @@ margin-bottom:20px;
 line-height:1.9;
 }
 
+.secure-note{
+font-size:13px;
+opacity:0.78;
+margin-top:-2px;
+margin-bottom:18px;
+line-height:1.5;
+}
+
 .explore-title{
 margin-top:24px;
 margin-bottom:12px;
 font-size:15px;
-opacity:0.85;
 font-weight:700;
+opacity:0.88;
 }
 
 .explore-grid{
@@ -258,6 +264,17 @@ background:rgba(255,255,255,0.18);
 transform:translateY(-2px);
 }
 
+.error{
+
+font-size:14px;
+
+margin-top:-4px;
+
+margin-bottom:14px;
+
+opacity:0.92;
+}
+
 </style>
 
 </head>
@@ -270,14 +287,23 @@ transform:translateY(-2px);
 
 <div class="card" id="step1">
 
-<h1>Hi 👋<br>I’m iZeni.</h1>
+<h1>
+Let’s personalise your experience ✨
+</h1>
 
 <p>
-Let’s personalise your banking setup.
+What’s your full name?
 </p>
 
-<button class="button" onclick="nextStep(1,2)">
-Get Started
+<input
+type="text"
+id="username"
+placeholder="Enter your full name">
+
+<div class="error" id="nameError"></div>
+
+<button class="button" onclick="saveName()">
+Continue
 </button>
 
 </div>
@@ -286,13 +312,25 @@ Get Started
 
 <div class="card hidden" id="step2">
 
-<h1>What should I call you?</h1>
+<h1 id="welcomeTitle"></h1>
 
-<input type="text" id="username" placeholder="Enter your name">
+<p>
+Are you already banking with <span class="ai">🤖 iZeni</span> ecosystem?
+</p>
 
-<button class="button" onclick="saveName()">
-Continue
-</button>
+<div class="options">
+
+<div class="option"
+onclick="existingCustomerJourney()">
+Yes, I already bank with ICICI
+</div>
+
+<div class="option"
+onclick="nextStep(2,3)">
+No, I’m exploring options
+</div>
+
+</div>
 
 </div>
 
@@ -300,28 +338,32 @@ Continue
 
 <div class="card hidden" id="step3">
 
-<h1 id="ctcTitle"></h1>
+<h1 id="salaryTitle"></h1>
 
 <p>
-This helps iZeni personalise your experience better.
+This helps <span class="ai">🤖 iZeni</span> tailor your banking experience.
 </p>
 
 <div class="options">
 
-<div class="option" onclick="saveCTC('₹5–10L')">
-₹5–10L
+<div class="option"
+onclick="saveSalary('PowerPay')">
+Up to ₹1L/month
 </div>
 
-<div class="option" onclick="saveCTC('₹10–20L')">
-₹10–20L
+<div class="option"
+onclick="saveSalary('Select')">
+₹1L–3L/month
 </div>
 
-<div class="option" onclick="saveCTC('₹20–35L')">
-₹20–35L
+<div class="option"
+onclick="saveSalary('Wealth')">
+₹3L–8L/month
 </div>
 
-<div class="option" onclick="saveCTC('₹35L+')">
-₹35L+
+<div class="option"
+onclick="saveSalary('Private')">
+₹8L+/month
 </div>
 
 </div>
@@ -335,29 +377,29 @@ This helps iZeni personalise your experience better.
 <h1 id="interestTitle"></h1>
 
 <p>
-What matters most to you right now?
+Which experience feels closest to your lifestyle?
 </p>
 
 <div class="options">
 
-<div class="option" onclick="saveInterest('Lifestyle')">
-Lifestyle
+<div class="option"
+onclick="saveInterest('Lifestyle')">
+Lifestyle & premium experiences
 </div>
 
-<div class="option" onclick="saveInterest('Travel')">
-Travel
+<div class="option"
+onclick="saveInterest('Travel')">
+Travel & international spends
 </div>
 
-<div class="option" onclick="saveInterest('Investing')">
-Investing
+<div class="option"
+onclick="saveInterest('Investing')">
+Investments & wealth creation
 </div>
 
-<div class="option" onclick="saveInterest('Family')">
-Family
-</div>
-
-<div class="option" onclick="saveInterest('Premium Experiences')">
-Premium Experiences
+<div class="option"
+onclick="saveInterest('Family')">
+Family & future planning
 </div>
 
 </div>
@@ -371,15 +413,16 @@ Premium Experiences
 <h1 id="recommendTitle"></h1>
 
 <p>
-Here’s a setup curated for you ✨
+<span class="ai">🤖 iZeni</span> curated this setup for you.
 </p>
 
-<div class="recommend-box" id="recommendBox">
-
+<div
+class="recommend-box"
+id="recommendBox">
 </div>
 
 <p>
-Let iZeni personalise your setup further.
+Let’s make your experience even smarter ✨
 </p>
 
 <div class="mobile-wrap">
@@ -400,14 +443,15 @@ placeholder="Mobile number">
 <input
 type="email"
 id="emailInput"
-placeholder="Work email">
+placeholder="Work email (optional)">
 
 <div class="secure-note">
-Used only to assist you better and personalise your experience.
+Used only to personalise your experience better.
 </div>
 
-<button class="button" onclick="submitLead()">
-Continue Personalising
+<button class="button"
+onclick="submitLead()">
+Continue Exploring
 </button>
 
 </div>
@@ -419,33 +463,69 @@ Continue Personalising
 <h1 id="finalTitle"></h1>
 
 <p>
-iZeni is curating smarter experiences for you ✨
+<span class="ai">🤖 iZeni</span> is curating more experiences for you ✨
 </p>
 
 <div class="explore-title">
-Continue exploring
+You may also like
 </div>
 
 <div class="explore-grid">
 
 <div class="explore-card"
 onclick="window.location.href='wealth.html'">
-📈 Grow My Wealth
+📈 Explore smarter investing
 </div>
 
 <div class="explore-card"
 onclick="window.location.href='milestone.html'">
-🏠 Plan My Next Milestone
+🏠 Unlock milestone funding
 </div>
 
 <div class="explore-card"
 onclick="window.location.href='games.html'">
-🎮 Play & Discover
+🎮 Try interactive experiences
 </div>
 
 <div class="explore-card"
 onclick="window.location.href='index.html'">
-✨ Explore More Experiences
+✨ Discover more with iZeni
+</div>
+
+</div>
+
+</div>
+
+<!-- EXISTING CUSTOMER FLOW -->
+
+<div class="card hidden" id="existingFlow">
+
+<h1 id="existingTitle"></h1>
+
+<p>
+What would you like to enhance today?
+</p>
+
+<div class="options">
+
+<div class="option">
+Upgrade my banking experience
+</div>
+
+<div class="option">
+Explore premium credit cards
+</div>
+
+<div class="option">
+Transfer existing loan
+</div>
+
+<div class="option">
+Grow investments smarter
+</div>
+
+<div class="option">
+Discover iMobile capabilities
 </div>
 
 </div>
@@ -457,7 +537,7 @@ onclick="window.location.href='index.html'">
 <script>
 
 let userName = "";
-let userCTC = "";
+let salaryType = "";
 let userInterest = "";
 
 function nextStep(current,next){
@@ -471,28 +551,56 @@ document.getElementById("step"+next)
 
 function saveName(){
 
-userName =
-document.getElementById("username").value;
+const input =
+document.getElementById("username").value.trim();
 
-if(userName.trim() === ""){
-alert("Please enter your name");
+const words = input.split(" ");
+
+if(
+input.length < 5 ||
+words.length < 2
+){
+
+document.getElementById("nameError")
+.innerHTML =
+"Help <span class='ai'>🤖 iZeni</span> know you better 😊 Please enter your full name.";
+
 return;
 }
 
-document.getElementById("ctcTitle")
+userName = input;
+
+document.getElementById("welcomeTitle")
 .innerHTML =
-`${userName}, what’s your annual CTC?`;
+`Welcome, ${userName} ✨`;
+
+document.getElementById("salaryTitle")
+.innerHTML =
+`${userName}, what’s your monthly salary range?`;
 
 document.getElementById("interestTitle")
 .innerHTML =
-`${userName}, what matters most to you?`;
+`${userName}, what are you looking to unlock next?`;
 
-nextStep(2,3);
+nextStep(1,2);
 }
 
-function saveCTC(ctc){
+function existingCustomerJourney(){
 
-userCTC = ctc;
+document.getElementById("step2")
+.classList.add("hidden");
+
+document.getElementById("existingTitle")
+.innerHTML =
+`${userName}, let’s elevate your banking experience ✨`;
+
+document.getElementById("existingFlow")
+.classList.remove("hidden");
+}
+
+function saveSalary(type){
+
+salaryType = type;
 
 nextStep(3,4);
 }
@@ -501,62 +609,63 @@ function saveInterest(interest){
 
 userInterest = interest;
 
-document.getElementById("recommendTitle")
-.innerHTML =
-`${userName}, here’s your ideal setup ✨`;
-
 let recommendations = "";
 
-if(interest === "Travel"){
+if(salaryType === "PowerPay"){
 
 recommendations = `
-✓ Salary Account<br>
-✓ Travel & lounge benefits<br>
-✓ Forex card access<br>
-✓ International spends support<br>
+✓ PowerPay Salary Account<br>
+✓ Rubyx Credit Card<br>
+✓ Amazon Pay Credit Card<br>
+✓ Everyday rewards & spends<br>
 ✓ Smart iMobile banking
 `;
 
 }
 
-else if(interest === "Investing"){
+if(salaryType === "Select"){
 
 recommendations = `
+✓ Select Salary Account<br>
+✓ Rubyx / Sapphiro Credit Card<br>
+✓ Amazon Pay Credit Card<br>
+✓ Lifestyle & travel privileges<br>
+✓ Relationship-based offers
+`;
+
+}
+
+if(salaryType === "Wealth"){
+
+recommendations = `
+✓ Wealth Salary Account<br>
+✓ Sapphiro / Emeralde Card<br>
 ✓ 3-in-1 Investment Account<br>
-✓ NPS & Mutual Fund access<br>
-✓ Stocks & FD investments<br>
-✓ Goal-based investing<br>
-✓ iFinance insights
+✓ Wealth servicing benefits<br>
+✓ Premium investment experiences
 `;
 
 }
 
-else if(interest === "Family"){
+if(salaryType === "Private"){
 
 recommendations = `
-✓ Family banking benefits<br>
-✓ Education funding solutions<br>
-✓ Insurance & protection support<br>
-✓ Shared financial management<br>
-✓ Smart savings options
+✓ Private Banking Privileges<br>
+✓ Emeralde Private Metal Card<br>
+✓ Dedicated relationship support<br>
+✓ Bespoke wealth experiences<br>
+✓ Premium lifestyle access
 `;
 
 }
 
-else{
-
-recommendations = `
-✓ Salary Account benefits<br>
-✓ Premium banking experience<br>
-✓ Smart iMobile features<br>
-✓ Pre-approved offers<br>
-✓ Lifestyle & rewards access
-`;
-
-}
+document.getElementById("recommendTitle")
+.innerHTML =
+`${userName}, here’s what fits you best ✨`;
 
 document.getElementById("recommendBox")
-.innerHTML = recommendations;
+.innerHTML =
+recommendations;
 
 nextStep(4,5);
 }
@@ -569,15 +678,15 @@ document.getElementById("mobileInput").value;
 const email =
 document.getElementById("emailInput").value;
 
-const mobileRegex = /^[6-9]\d{9}$/;
+const regex =
+/^[6-9]\d{9}$/;
 
-if(!mobileRegex.test(mobile)){
-alert("Please enter a valid Indian mobile number");
-return;
-}
+if(!regex.test(mobile)){
 
-if(email.length < 5 || !email.includes("@")){
-alert("Please enter a valid email");
+alert(
+"Please enter a valid Indian mobile number to continue your personalised experience."
+);
+
 return;
 }
 
@@ -590,7 +699,7 @@ if(existingLead){
 
 document.getElementById("finalTitle")
 .innerHTML =
-`Welcome back ${userName} 👋`;
+`Welcome back, ${userName} 👋`;
 
 nextStep(5,6);
 
@@ -604,19 +713,19 @@ localStorage.setItem(
 "true"
 );
 
-/* GOOGLE SHEETS INTEGRATION */
+/* GOOGLE SHEETS PAYLOAD */
 
 const payload = {
 
 name:userName,
-ctc:userCTC,
+salary:salaryType,
 interest:userInterest,
 mobile:"+91" + mobile,
 email:email
 
 };
 
-/* REPLACE WITH YOUR GOOGLE SCRIPT URL */
+/* GOOGLE SHEET WEB APP URL */
 
 fetch(
 "https://script.google.com/macros/s/PASTE-YOUR-URL-HERE/exec",
@@ -628,7 +737,7 @@ body:JSON.stringify(payload)
 
 document.getElementById("finalTitle")
 .innerHTML =
-`${userName}, your setup is getting smarter ✨`;
+`${userName}, your experience is getting smarter ✨`;
 
 nextStep(5,6);
 
