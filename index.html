@@ -17,16 +17,8 @@
 
 body{
 margin:0;
-font-family:'inter',sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#ff8a1d 0%,
-#ff6a00 45%,
-#eb5200 100%
-);
-
+font-family:'Mulish',sans-serif;
+background:linear-gradient(180deg,#ff8a1d 0%,#ff6a00 45%,#eb5200 100%);
 color:white;
 overflow-x:hidden;
 min-height:100vh;
@@ -71,31 +63,21 @@ margin-bottom:-10px;
 position:absolute;
 width:320px;
 height:320px;
-
 background:rgba(255,255,255,0.16);
-
 border-radius:50%;
-
 filter:blur(70px);
-
 left:50%;
 transform:translateX(-50%);
-
 top:10px;
-
 z-index:0;
 }
 
 .robot{
 width:220px;
-
 position:relative;
 z-index:2;
-
 animation:float 5s ease-in-out infinite;
-
-filter:
-drop-shadow(0 0 40px rgba(255,255,255,0.35));
+filter:drop-shadow(0 0 40px rgba(255,255,255,0.35));
 }
 
 @keyframes float{
@@ -117,33 +99,26 @@ transform:translateY(0px);
 /* CHAT */
 
 .chat-shell{
-
 max-width:950px;
 margin:auto;
 padding:0px 20px 50px;
 position:relative;
 z-index:2;
-
 }
 
 .chat-window{
-
 display:flex;
 flex-direction:column;
 gap:18px;
-
 margin-top:10px;
 margin-bottom:25px;
-
 }
 
-/* MESSAGE */
+/* MESSAGES */
 
 .bot-message,
 .user-message{
-
 display:flex;
-
 }
 
 .bot-message{
@@ -155,131 +130,76 @@ justify-content:flex-end;
 }
 
 .message-bubble{
-
 max-width:78%;
-
 padding:18px 22px;
-
 border-radius:24px;
-
 font-size:16px;
 line-height:1.7;
-
 backdrop-filter:blur(18px);
-
-background:
-rgba(255,255,255,0.16);
-
-border:
-1px solid rgba(255,255,255,0.15);
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.10);
-
+background:rgba(255,255,255,0.16);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 10px 30px rgba(0,0,0,0.10);
 }
 
 .user-message .message-bubble{
-
 background:white;
 color:#ff6a00;
-
 font-weight:700;
-
 }
 
-/* STARTERS */
+/* STARTER GRID */
 
 .starter-grid{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
 gap:16px;
-
 margin-bottom:28px;
-
 }
 
 .starter-card{
-
 padding:22px;
-
 border-radius:24px;
-
 cursor:pointer;
-
 font-weight:700;
-
 line-height:1.5;
-
 backdrop-filter:blur(18px);
-
-background:
-rgba(255,255,255,0.14);
-
-border:
-1px solid rgba(255,255,255,0.15);
-
+background:rgba(255,255,255,0.14);
+border:1px solid rgba(255,255,255,0.15);
 transition:0.3s ease;
-
 }
 
 .starter-card:hover{
-
 transform:translateY(-4px);
-
-background:
-rgba(255,255,255,0.22);
-
+background:rgba(255,255,255,0.22);
 }
 
 /* INPUT */
 
 .input-bar{
-
 display:flex;
 gap:14px;
-
 margin-bottom:40px;
-
 }
 
 .input-bar input{
-
 flex:1;
-
 border:none;
 outline:none;
-
 padding:20px;
-
 border-radius:20px;
-
 font-size:16px;
-
-font-family:'inter',sans-serif;
-
+font-family:'Mulish',sans-serif;
 }
 
 .input-bar button{
-
 border:none;
-
 padding:0 28px;
-
 border-radius:20px;
-
 background:white;
-
 color:#ff6a00;
-
 font-weight:800;
-
 font-size:16px;
-
 cursor:pointer;
-
 }
 
 /* MOBILE */
@@ -360,37 +280,31 @@ What would you like to explore today?
 
 </div>
 
-<!-- STARTERS -->
+<!-- STARTER CARDS -->
 
 <div class="starter-grid">
 
-<div class="starter-card"
-onclick="sendMessage('Let iZeni craft an ideal banking setup')">
+<div class="starter-card" onclick="sendMessage('Let iZeni craft an ideal banking setup')">
 🏦 Let iZeni craft an ideal banking setup
 </div>
 
-<div class="starter-card"
-onclick="sendMessage('Discover better ways to build wealth')">
+<div class="starter-card" onclick="sendMessage('Discover better ways to build wealth')">
 📈 Discover better ways to build wealth
 </div>
 
-<div class="starter-card"
-onclick="sendMessage('Find your perfect premium card match')">
+<div class="starter-card" onclick="sendMessage('Find your perfect premium card match')">
 💳 Find your perfect premium card match
 </div>
 
-<div class="starter-card"
-onclick="sendMessage('Make international travel more effortless')">
+<div class="starter-card" onclick="sendMessage('Make international travel more effortless')">
 ✈️ Make international travel more effortless
 </div>
 
-<div class="starter-card"
-onclick="sendMessage('Put your fraud awareness to the test')">
+<div class="starter-card" onclick="sendMessage('Put your fraud awareness to the test')">
 🎮 Put your fraud awareness to the test
 </div>
 
-<div class="starter-card"
-onclick="sendMessage('Unlock hidden iMobile capabilities')">
+<div class="starter-card" onclick="sendMessage('Unlock hidden iMobile capabilities')">
 📱 Unlock hidden iMobile capabilities
 </div>
 
@@ -423,65 +337,63 @@ Send
 
 window.botpress.init({
 
-botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
+botId:"fe3a4263-6168-4dc5-b7f1-1f30529baa12",
 
-clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8",
+clientId:"c2639e0b-48ce-4798-b906-70da72ce2ec8",
 
-configuration: {
+configuration:{
 
-version: "v2",
+version:"v2",
 
-botName: "iZeni",
+botName:"iZeni",
 
-botDescription: "Your personalised AI banking companion",
+botDescription:"Your personalised AI banking companion",
 
-website: {},
+website:{},
 
-email: {},
+email:{},
 
-phone: {},
+phone:{},
 
-termsOfService: {},
+termsOfService:{},
 
-privacyPolicy: {},
+privacyPolicy:{},
 
-color: "#F26D21",
+color:"#F26D21",
 
-variant: "solid",
+variant:"solid",
 
-themeMode: "light",
+themeMode:"light",
 
-fontFamily: "inter",
+fontFamily:"inter",
 
-radius: 2,
+radius:2,
 
-feedbackEnabled: false,
+feedbackEnabled:false,
 
-footer: "",
-
-showPoweredBy: false
+footer:""
 
 }
 
 });
 
-/* HIDE ORIGINAL CHAT */
+/* HIDE DEFAULT CHAT */
 
-window.botpress.on("webchat:ready", () => {
+window.botpress.on("webchat:ready",()=>{
 
-const iframe = document.querySelector("iframe");
+const iframe=document.querySelector("iframe");
 
 if(iframe){
-iframe.style.display = "none";
+iframe.style.display="none";
 }
 
 });
 
-/* USER MESSAGE */
+/* ADD USER MESSAGE */
 
 function addUserMessage(text){
 
-const chat=document.getElementById('chatWindow');
+const chat=document.getElementById("chatWindow");
 
 chat.innerHTML += `
 <div class="user-message">
@@ -493,16 +405,16 @@ ${text}
 
 window.scrollTo({
 top:document.body.scrollHeight,
-behavior:'smooth'
+behavior:"smooth"
 });
 
 }
 
-/* BOT MESSAGE */
+/* ADD BOT MESSAGE */
 
 function addBotMessage(text){
 
-const chat=document.getElementById('chatWindow');
+const chat=document.getElementById("chatWindow");
 
 chat.innerHTML += `
 <div class="bot-message">
@@ -514,7 +426,7 @@ ${text}
 
 window.scrollTo({
 top:document.body.scrollHeight,
-behavior:'smooth'
+behavior:"smooth"
 });
 
 }
@@ -525,9 +437,9 @@ function sendMessage(text){
 
 addUserMessage(text);
 
-const loadingId = "loading-" + Date.now();
+const loadingId="loading-"+Date.now();
 
-const chat=document.getElementById('chatWindow');
+const chat=document.getElementById("chatWindow");
 
 chat.innerHTML += `
 <div class="bot-message" id="${loadingId}">
@@ -541,11 +453,11 @@ window.botpress.sendMessage(text);
 
 }
 
-/* RECEIVE AI RESPONSE */
+/* RECEIVE RESPONSE */
 
-window.botpress.on("message", (message) => {
+window.botpress.on("message",(message)=>{
 
-const loading = document.querySelector('[id^="loading-"]');
+const loading=document.querySelector('[id^="loading-"]');
 
 if(loading){
 loading.remove();
@@ -563,13 +475,13 @@ addBotMessage(message.payload.text);
 
 function submitInput(){
 
-const input=document.getElementById('userInput');
+const input=document.getElementById("userInput");
 
-if(input.value.trim() !== ''){
+if(input.value.trim() !== ""){
 
 sendMessage(input.value);
 
-input.value='';
+input.value="";
 
 }
 
@@ -577,7 +489,7 @@ input.value='';
 
 function handleKey(e){
 
-if(e.key === 'Enter'){
+if(e.key === "Enter"){
 submitInput();
 }
 
