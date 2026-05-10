@@ -338,7 +338,7 @@ Your personalised AI banking companion
 
 </div>
 
-<!-- AI CHAT -->
+<!-- CHAT -->
 
 <div class="chat-shell">
 
@@ -360,50 +360,38 @@ What would you like to explore today?
 
 </div>
 
-<!-- STARTER CARDS -->
+<!-- STARTERS -->
 
 <div class="starter-grid">
 
 <div class="starter-card"
 onclick="sendMessage('Let iZeni craft an ideal banking setup')">
-
 🏦 Let iZeni craft an ideal banking setup
-
 </div>
 
 <div class="starter-card"
 onclick="sendMessage('Discover better ways to build wealth')">
-
 📈 Discover better ways to build wealth
-
 </div>
 
 <div class="starter-card"
 onclick="sendMessage('Find your perfect premium card match')">
-
 💳 Find your perfect premium card match
-
 </div>
 
 <div class="starter-card"
 onclick="sendMessage('Make international travel more effortless')">
-
 ✈️ Make international travel more effortless
-
 </div>
 
 <div class="starter-card"
 onclick="sendMessage('Put your fraud awareness to the test')">
-
 🎮 Put your fraud awareness to the test
-
 </div>
 
 <div class="starter-card"
 onclick="sendMessage('Unlock hidden iMobile capabilities')">
-
 📱 Unlock hidden iMobile capabilities
-
 </div>
 
 </div>
@@ -432,7 +420,10 @@ Send
 <script>
 
 const API_KEY = "bp_bak_qIhp7YWgTU-ZtCqFecWf0ZwigATIAq2AjsFc";
+
 const BOT_ID = "fe3a4263-6168-4dc5-b7f1-1f30529baa12";
+
+let conversationId = null;
 
 function addUserMessage(text){
 
@@ -499,36 +490,38 @@ try{
 
 /* CREATE CONVERSATION */
 
+if(!conversationId){
+
 const convResponse = await fetch(
-'https://api.botpress.cloud/v1/chat/conversations',
+`https://chat.botpress.cloud/${BOT_ID}/conversations`,
 {
 method:'POST',
 headers:{
-'Authorization':`Bearer ${API_KEY}`,
-'x-bot-id':BOT_ID,
-'Content-Type':'application/json'
+'Content-Type':'application/json',
+'x-user-key':API_KEY
 }
 }
 );
 
 const convData = await convResponse.json();
 
-const conversationId = convData.id;
+conversationId = convData.id;
+
+}
 
 /* SEND MESSAGE */
 
 const msgResponse = await fetch(
-`https://api.botpress.cloud/v1/chat/conversations/${conversationId}/messages`,
+`https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/messages`,
 {
 method:'POST',
 headers:{
-'Authorization':`Bearer ${API_KEY}`,
-'x-bot-id':BOT_ID,
-'Content-Type':'application/json'
+'Content-Type':'application/json',
+'x-user-key':API_KEY
 },
 body:JSON.stringify({
-type:'text',
 payload:{
+type:'text',
 text:text
 }
 })
@@ -543,13 +536,13 @@ document.getElementById(loadingId).remove();
 
 /* SHOW RESPONSE */
 
-if(msgData.responses && msgData.responses.length > 0){
+if(msgData.responses){
 
-msgData.responses.forEach(response => {
+msgData.responses.forEach(r=>{
 
-if(response.payload && response.payload.text){
+if(r.payload && r.payload.text){
 
-addBotMessage(response.payload.text);
+addBotMessage(r.payload.text);
 
 }
 
@@ -565,7 +558,7 @@ addBotMessage("I’m unable to respond right now.");
 
 document.getElementById(loadingId).remove();
 
-addBotMessage("Something went wrong while connecting to iZeni.");
+addBotMessage("Connection issue while reaching iZeni.");
 
 console.log(error);
 
