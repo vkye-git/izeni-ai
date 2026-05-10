@@ -327,11 +327,9 @@ Send
 
 </div>
 
-<!-- SCRIPT -->
-
 <script>
 
-const OPENAI_API_KEY = "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"
+const API_URL = 'https://izeni-ai.vercel.app/api/chat'
 
 function scrollBottom(){
 
@@ -409,25 +407,22 @@ addTyping()
 try{
 
 const response = await fetch(
-'https://api.openai.com/v1/chat/completions',
+API_URL,
 {
 method:'POST',
 
 headers:{
-'Content-Type':'application/json',
-'Authorization':`Bearer ${OPENAI_API_KEY}`
+'Content-Type':'application/json'
 },
 
 body:JSON.stringify({
-
-model:'gpt-4.1-mini',
 
 messages:[
 
 {
 role:'system',
 content:`
-You are iZeni — a premium AI-powered banking companion for Bank of America employees in India.
+You are iZeni — a premium AI-powered banking companion.
 
 Your tone:
 - premium
@@ -440,8 +435,8 @@ You help users with:
 - banking setup
 - wealth creation
 - premium cards
-- travel benefits
 - investments
+- travel
 - fraud awareness
 - digital banking
 `
@@ -452,9 +447,7 @@ role:'user',
 content:text
 }
 
-],
-
-temperature:0.7
+]
 
 })
 
@@ -462,6 +455,8 @@ temperature:0.7
 )
 
 const data = await response.json()
+
+console.log(data)
 
 removeTyping()
 
