@@ -12,32 +12,36 @@ return res.status(200).end()
 
 try {
 
-const openaiResponse = await fetch(
-'https://api.openai.com/v1/chat/completions',
+const userMessage =
+req.body.messages[req.body.messages.length - 1].content
+
+const response = await fetch(
+`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.Gemini_API_Key}`,
 {
 method:'POST',
 
 headers:{
-'Content-Type':'application/json',
-'Authorization':`Bearer ${process.env.OPENAI_API_KEY}`
+'Content-Type':'application/json'
 },
 
 body:JSON.stringify({
 
-model:'gpt-4o-mini',
-
-messages:req.body.messages,
-
-temperature:0.7
+contents:[
+{
+parts:[
+{
+text:userMessage
+}
+]
+}
+]
 
 })
 
 }
 )
 
-const data = await openaiResponse.json()
-
-/* RETURN COMPLETE RESPONSE */
+const data = await response.json()
 
 return res.status(200).json(data)
 
