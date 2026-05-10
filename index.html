@@ -1,124 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iZeni - AI Banking Co-Pilot</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff7f0;
-      color: #222;
-      text-align: center;
-    }
+<title>iZeni - AI Banking Co-Pilot</title>
 
-    .hero {
-      padding: 40px 20px;
-    }
+<style>
 
-    .hero h1 {
-      font-size: 40px;
-      color: #f37021;
-      margin-bottom: 10px;
-    }
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#ff6a00,#ff8c1a);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
 
-    .hero p {
-      font-size: 18px;
-      color: #555;
-    }
+.hero{
+padding:60px 20px 30px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-    }
+.hero h1{
+font-size:56px;
+font-weight:800;
+margin-bottom:10px;
+line-height:1.1;
+}
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: 0.3s;
-      cursor: pointer;
-    }
+.hero p{
+font-size:20px;
+opacity:0.95;
+margin-bottom:30px;
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+.robot{
+width:240px;
+margin:auto;
+display:block;
+filter:drop-shadow(0 0 30px rgba(255,255,255,0.35));
+}
 
-    .card h2 {
-      color: #f37021;
-      margin-bottom: 10px;
-    }
+.cards{
+display:grid;
+grid-template-columns:1fr;
+gap:18px;
+padding:30px 20px 60px;
+max-width:500px;
+margin:auto;
+}
 
-    .card p {
-      color: #666;
-      font-size: 15px;
-    }
+.card{
+background:white;
+border-radius:24px;
+padding:24px;
+color:#222;
+text-align:left;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:0.3s;
+cursor:pointer;
+}
 
-    .footer {
-      padding: 30px;
-      color: #777;
-      font-size: 14px;
-    }
+.card:hover{
+transform:translateY(-5px);
+}
 
-    @media(min-width: 768px){
-      .cards{
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+.card h2{
+margin-top:0;
+color:#f37021;
+font-size:24px;
+}
+
+.card p{
+color:#666;
+font-size:15px;
+line-height:1.5;
+}
+
+.footer{
+padding:30px;
+font-size:14px;
+opacity:0.9;
+}
+
+@media(min-width:768px){
+
+.hero h1{
+font-size:72px;
+}
+
+.cards{
+grid-template-columns:1fr 1fr;
+max-width:900px;
+}
+
+.robot{
+width:300px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="hero">
-    <h1>Meet iZeni</h1>
-    <p>Your AI Banking Co-Pilot</p>
-  </div>
+<div class="hero">
 
-  <div class="cards">
+<h1>Your Banking.<br>Smarter.</h1>
 
-    <div class="card">
-      <h2>🎮 Play & Explore</h2>
-      <p>Games, quizzes & financial challenges</p>
-    </div>
+<p>Meet iZeni — Your AI Banking Co-Pilot</p>
 
-    <div class="card">
-      <h2>🏦 Find My Banking Setup</h2>
-      <p>Discover your ideal salary account</p>
-    </div>
+<img src="robot.png" class="robot">
 
-    <div class="card">
-      <h2>📈 Investments & NPS</h2>
-      <p>Plan your financial freedom journey</p>
-    </div>
+</div>
 
-    <div class="card">
-      <h2>🏠 Loans & Life Goals</h2>
-      <p>Fund your next big milestone</p>
-    </div>
+<div class="cards">
 
-    <div class="card">
-      <h2>📱 Explore iMobile</h2>
-      <p>Unlock smart digital banking features</p>
-    </div>
+<div class="card">
+<h2>🎮 Play & Explore</h2>
+<p>Interactive games, quizzes & financial challenges</p>
+</div>
 
-    <div class="card">
-      <h2>🎁 BofA Exclusive Benefits</h2>
-      <p>Explore exclusive employee offers</p>
-    </div>
+<div class="card">
+<h2>🏦 Find My Banking Setup</h2>
+<p>Discover the right salary account & benefits for you</p>
+</div>
 
-  </div>
+<div class="card">
+<h2>📈 Investments & NPS</h2>
+<p>Plan your financial freedom journey smartly</p>
+</div>
 
-  <div class="footer">
-    Powered by iZeni AI Experience
-  </div>
+<div class="card">
+<h2>📱 Explore iMobile</h2>
+<p>Unlock powerful digital banking capabilities</p>
+</div>
+
+<div class="card">
+<h2>🏠 Loans & Life Goals</h2>
+<p>Fund your next milestone with smart solutions</p>
+</div>
+
+<div class="card">
+<h2>🎁 BofA Exclusive Benefits</h2>
+<p>Explore curated offers designed for employees</p>
+</div>
+
+</div>
+
+<div class="footer">
+Powered by iZeni AI Experience
+</div>
 
 </body>
 </html>
