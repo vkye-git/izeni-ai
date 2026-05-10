@@ -465,6 +465,10 @@ chat.innerHTML += `
 
 try{
 
+await window.botpress.open();
+
+await new Promise(resolve => setTimeout(resolve,1000));
+
 await window.botpress.sendEvent({
 type:"text",
 payload:{
