@@ -25,7 +25,7 @@ min-height:100vh;
 position:relative;
 }
 
-/* REMOVE BOTPRESS UI */
+/* FORCE HIDE ALL BOTPRESS UI */
 
 .bpw-floating-button,
 .bpw-widget-btn,
@@ -122,7 +122,7 @@ margin-top:10px;
 margin-bottom:25px;
 }
 
-/* MESSAGES */
+/* MESSAGE */
 
 .bot-message,
 .user-message{
@@ -155,7 +155,7 @@ color:#ff6a00;
 font-weight:700;
 }
 
-/* STARTERS */
+/* STARTER GRID */
 
 .starter-grid{
 display:grid;
@@ -344,6 +344,10 @@ Send
 
 <script>
 
+let botReady = false;
+
+/* INIT */
+
 window.botpress.init({
 
 botId:"fe3a4263-6168-4dc5-b7f1-1f30529baa12",
@@ -385,6 +389,32 @@ feedbackEnabled:false,
 footer:""
 
 }
+
+});
+
+/* READY */
+
+window.botpress.on("webchat:ready", () => {
+
+botReady = true;
+
+/* FORCE HIDE POPUP */
+
+const hideBotpress = () => {
+
+document.querySelectorAll(
+'.bpw-floating-button, .bpw-widget-btn, .bpw-layout'
+).forEach(el => {
+
+el.style.display = "none";
+
+});
+
+};
+
+hideBotpress();
+
+setInterval(hideBotpress,1000);
 
 });
 
@@ -432,7 +462,15 @@ behavior:"smooth"
 
 /* SEND MESSAGE */
 
-function sendMessage(text){
+async function sendMessage(text){
+
+if(!botReady){
+
+addBotMessage("✨ iZeni is getting ready. Please try again in a moment.");
+
+return;
+
+}
 
 addUserMessage(text);
 
@@ -448,13 +486,25 @@ chat.innerHTML += `
 </div>
 `;
 
-window.botpress.sendMessage(text);
+try{
+
+await window.botpress.sendMessage(text);
+
+}catch(err){
+
+document.getElementById(loadingId)?.remove();
+
+addBotMessage("Connection issue while reaching iZeni.");
+
+console.log(err);
+
+}
 
 }
 
 /* RECEIVE RESPONSE */
 
-window.botpress.on("message", (event) => {
+window.botpress.on("message",(event)=>{
 
 console.log(event);
 
@@ -464,13 +514,9 @@ if(loading){
 loading.remove();
 }
 
-if(event && event.payload){
-
-if(event.payload.text){
+if(event?.payload?.text){
 
 addBotMessage(event.payload.text);
-
-}
 
 }
 
