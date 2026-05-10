@@ -379,6 +379,8 @@ userId:'web-user'
 
 const data = await response.json()
 
+console.log("CREATE CONVERSATION:", data)
+
 conversationId = data.conversationId
 
 }
@@ -424,20 +426,45 @@ text:text
 
 const data = await response.json()
 
+console.log("FULL RESPONSE:", data)
+
 removeTyping()
 
-let reply = "I couldn't generate a response."
+let reply = "No response received from iZeni."
 
-if(data.responses && data.responses.length > 0){
+/* HANDLE DIFFERENT RESPONSE TYPES */
 
-const firstResponse = data.responses[0]
+if(data.responses){
+
+for(const item of data.responses){
+
+if(item.type === "text"){
 
 reply =
-firstResponse.payload?.text ||
-firstResponse.text ||
-firstResponse.payload ||
-JSON.stringify(firstResponse)
+item.payload?.text ||
+item.text ||
+reply
 
+break
+
+}
+
+}
+
+}
+
+/* FALLBACKS */
+
+if(data.message){
+
+reply =
+data.message.payload?.text ||
+data.message.text ||
+reply
+}
+
+if(typeof data === "string"){
+reply = data
 }
 
 addBotMessage(reply)
@@ -446,9 +473,9 @@ addBotMessage(reply)
 
 removeTyping()
 
-addBotMessage("Unable to reach iZeni right now.")
-
 console.log(error)
+
+addBotMessage("Unable to reach iZeni right now.")
 
 }
 
