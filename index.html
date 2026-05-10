@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>iZeni</title>
+<title>iZeni - AI experience</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,24 +48,60 @@ linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
 
 background-size:40px 40px;
 
-opacity:0.35;
+opacity:0.28;
 
 pointer-events:none;
 
 z-index:0;
 }
 
+/* GLOWING CIRCUIT LINES */
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.12) 0%, transparent 20%),
+radial-gradient(circle at 80% 20%, rgba(255,255,255,0.10) 0%, transparent 18%),
+radial-gradient(circle at 50% 80%, rgba(255,255,255,0.08) 0%, transparent 20%);
+
+pointer-events:none;
+
+z-index:0;
+
+animation:glowMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove{
+
+0%{
+transform:translateY(0px);
+opacity:0.5;
+}
+
+100%{
+transform:translateY(-20px);
+opacity:0.8;
+}
+
+}
+
 /* HERO */
 
 .hero{
-padding:40px 20px 10px;
+padding:30px 20px 0px;
 text-align:center;
 position:relative;
 z-index:2;
 }
 
 .hero h1{
-font-size:88px;
+font-size:72px;
 font-weight:800;
 line-height:0.95;
 margin:0;
@@ -84,8 +120,8 @@ letter-spacing:0.2px;
 
 .robot-wrap{
 position:relative;
-margin-top:20px;
-margin-bottom:10px;
+margin-top:0px;
+margin-bottom:-10px;
 }
 
 .robot-glow{
@@ -97,7 +133,7 @@ background:rgba(255,255,255,0.16);
 
 border-radius:50%;
 
-filter:blur(90px);
+filter:blur(70px);
 
 left:50%;
 transform:translateX(-50%);
@@ -159,7 +195,7 @@ position:relative;
 z-index:2;
 }
 
-/* GLASS CARDS */
+/* GLASSMORPHISM CARDS */
 
 .card{
 
@@ -282,11 +318,11 @@ z-index:2;
 @media(min-width:768px){
 
 .hero{
-padding-top:60px;
+padding-top:40px;
 }
 
 .hero h1{
-font-size:140px;
+font-size:110px;
 }
 
 .robot{
@@ -342,13 +378,13 @@ max-width:900px;
 
 <div class="card">
 <h2>🎮 Play & Discover</h2>
-<p>Interactive experiences around banking & money</p>
+<p>Interactive experiences around banking, money & fraud awareness</p>
 </div>
 
 </div>
 
 <div class="footer">
-Powered by iZeni AI Experience
+Powered by iZeni AI experience
 </div>
 
 </body>
