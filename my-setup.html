@@ -233,6 +233,10 @@ margin-bottom:14px;
 opacity:0.92;
 }
 
+.hidden{
+display:none;
+}
+
 </style>
 
 </head>
@@ -241,9 +245,9 @@ opacity:0.92;
 
 <div class="container">
 
-<div class="card">
+<!-- STEP 1 -->
 
-<!-- AI HEADER -->
+<div class="card" id="step1">
 
 <div class="ai-wrap">
 
@@ -278,9 +282,42 @@ Continue
 
 </div>
 
+<!-- STEP 2 -->
+
+<div class="card hidden" id="step2">
+
+<div class="ai-wrap">
+
+<div class="ai-glow"></div>
+
+<div class="ai-name">
+iZeni
+</div>
+
+<img src="robot.png" class="ai-bot">
+
+</div>
+
+<h1 id="welcomeTitle"></h1>
+
+<p>
+Your experience is now being personalised ✨
+</p>
+
+</div>
+
 </div>
 
 <script>
+
+function nextStep(current,next){
+
+document.getElementById("step"+current)
+.classList.add("hidden");
+
+document.getElementById("step"+next)
+.classList.remove("hidden");
+}
 
 function saveName(){
 
@@ -290,18 +327,32 @@ document.getElementById("username").value.trim();
 const words = input.split(" ");
 
 if(
-input.length < 5 ||
-words.length < 2
+words.length < 2 ||
+words[0].length < 2 ||
+words[1].length < 1
 ){
 
 document.getElementById("nameError")
 .innerHTML =
-"Help iZeni know you better 😊 Please enter your full name.";
+"Please enter your first and last name so iZeni can personalise your experience better 😊";
 
 return;
 }
 
-alert("Journey continues from here ✨");
+/* CLEAR ERROR */
+
+document.getElementById("nameError")
+.innerHTML = "";
+
+/* UPDATE NEXT SCREEN */
+
+document.getElementById("welcomeTitle")
+.innerHTML =
+`Welcome, ${input} ✨`;
+
+/* CONTINUE FLOW */
+
+nextStep(1,2);
 
 }
 
