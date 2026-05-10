@@ -8,6 +8,142 @@
 
 <style>
 
+  body{
+margin:0;
+font-family:Inter,Arial,sans-serif;
+background:
+radial-gradient(circle at top,#ff9d2f 0%,#ff6a00 35%,#e65100 100%);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+.hero{
+padding:40px 20px 10px;
+text-align:center;
+position:relative;
+}
+
+.hero h1{
+font-size:72px;
+font-weight:900;
+line-height:0.95;
+margin:0;
+letter-spacing:-3px;
+}
+
+.hero p{
+margin-top:18px;
+font-size:22px;
+opacity:0.92;
+font-weight:400;
+}
+
+.robot-wrap{
+position:relative;
+margin-top:20px;
+margin-bottom:10px;
+}
+
+.robot-glow{
+position:absolute;
+width:320px;
+height:320px;
+background:rgba(255,255,255,0.18);
+border-radius:50%;
+filter:blur(80px);
+left:50%;
+transform:translateX(-50%);
+top:10px;
+z-index:0;
+}
+
+.robot{
+width:220px;
+position:relative;
+z-index:2;
+animation:float 5s ease-in-out infinite;
+filter:drop-shadow(0 0 40px rgba(255,255,255,0.35));
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-14px);}
+100%{transform:translateY(0px);}
+}
+
+.cards{
+display:grid;
+grid-template-columns:1fr;
+gap:18px;
+padding:20px;
+max-width:950px;
+margin:auto;
+margin-top:20px;
+padding-bottom:60px;
+}
+
+.card{
+backdrop-filter:blur(16px);
+background:rgba(255,255,255,0.18);
+border:1px solid rgba(255,255,255,0.22);
+border-radius:28px;
+padding:24px;
+color:white;
+text-align:left;
+transition:all 0.3s ease;
+cursor:pointer;
+box-shadow:
+0 8px 30px rgba(0,0,0,0.12);
+}
+
+.card:hover{
+transform:translateY(-6px) scale(1.02);
+background:rgba(255,255,255,0.24);
+}
+
+.card h2{
+margin:0 0 12px;
+font-size:28px;
+font-weight:700;
+}
+
+.card p{
+margin:0;
+font-size:16px;
+line-height:1.6;
+opacity:0.92;
+}
+
+.footer{
+text-align:center;
+padding:30px;
+font-size:14px;
+opacity:0.8;
+}
+
+@media(min-width:768px){
+
+.hero{
+padding-top:60px;
+}
+
+.hero h1{
+font-size:110px;
+}
+
+.robot{
+width:280px;
+}
+
+.cards{
+grid-template-columns:1fr 1fr;
+gap:24px;
+margin-top:10px;
+}
+
+}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
@@ -111,7 +247,11 @@ width:300px;
 
 <p>Meet iZeni — Your AI Banking Co-Pilot</p>
 
+<div class="robot-wrap">
+<div class="robot-glow"></div>
+
 <img src="robot.png" class="robot">
+</div>
 
 </div>
 
