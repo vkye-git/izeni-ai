@@ -25,7 +25,7 @@ min-height:100vh;
 position:relative;
 }
 
-/* FORCE HIDE ALL BOTPRESS UI */
+/* HIDE ALL BOTPRESS UI */
 
 .bpw-floating-button,
 .bpw-widget-btn,
@@ -345,10 +345,6 @@ Send
 
 <script>
 
-let botReady = false;
-
-/* INIT */
-
 window.botpress.init({
 
 botId:"fe3a4263-6168-4dc5-b7f1-1f30529baa12",
@@ -393,33 +389,19 @@ footer:""
 
 });
 
-/* INITIALIZED */
+/* FORCE HIDE ALL POPUPS */
 
-window.botpress.on("webchat:initialized", () => {
-
-setTimeout(() => {
-botReady = true;
-}, 1500);
-
-/* FORCE HIDE POPUP */
-
-const hideBotpress = () => {
+setInterval(()=>{
 
 document.querySelectorAll(
 '.bpw-floating-button, .bpw-widget-btn, .bpw-layout, iframe'
-).forEach(el => {
+).forEach(el=>{
 
-el.style.display = "none";
-
-});
-
-};
-
-hideBotpress();
-
-setInterval(hideBotpress,1000);
+el.style.display='none';
 
 });
+
+},500);
 
 /* USER MESSAGE */
 
@@ -483,7 +465,12 @@ chat.innerHTML += `
 
 try{
 
-await window.botpress.sendMessage(text);
+await window.botpress.sendEvent({
+type:"text",
+payload:{
+text:text
+}
+});
 
 }catch(err){
 
@@ -500,8 +487,6 @@ console.log(err);
 /* RECEIVE RESPONSE */
 
 window.botpress.on("message",(event)=>{
-
-console.log(event);
 
 const loading=document.querySelector('[id^="loading-"]');
 
