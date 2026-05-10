@@ -29,7 +29,8 @@ position:relative;
 
 .bpw-floating-button,
 .bpw-widget-btn,
-.bpw-layout{
+.bpw-layout,
+iframe{
 display:none !important;
 }
 
@@ -155,7 +156,7 @@ color:#ff6a00;
 font-weight:700;
 }
 
-/* STARTER GRID */
+/* STARTERS */
 
 .starter-grid{
 display:grid;
@@ -392,18 +393,20 @@ footer:""
 
 });
 
-/* READY */
+/* INITIALIZED */
 
-window.botpress.on("webchat:ready", () => {
+window.botpress.on("webchat:initialized", () => {
 
+setTimeout(() => {
 botReady = true;
+}, 1500);
 
 /* FORCE HIDE POPUP */
 
 const hideBotpress = () => {
 
 document.querySelectorAll(
-'.bpw-floating-button, .bpw-widget-btn, .bpw-layout'
+'.bpw-floating-button, .bpw-widget-btn, .bpw-layout, iframe'
 ).forEach(el => {
 
 el.style.display = "none";
@@ -463,14 +466,6 @@ behavior:"smooth"
 /* SEND MESSAGE */
 
 async function sendMessage(text){
-
-if(!botReady){
-
-addBotMessage("✨ iZeni is getting ready. Please try again in a moment.");
-
-return;
-
-}
 
 addUserMessage(text);
 
