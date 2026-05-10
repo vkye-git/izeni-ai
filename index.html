@@ -359,45 +359,37 @@ onclick="sendPrompt('Unlock hidden iMobile capabilities')">
 Powered by iZeni AI Experience
 </div>
 
-<!-- BOTPRESS CONTAINER -->
-
-<div id="bp-web-widget-container"></div>
-
 <!-- BOTPRESS -->
 
-<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
 
 <script>
 
-window.botpress.init({
+window.botpressWebChat.init({
   botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
   clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8",
-  configuration: {
-    botName: "iZeni",
-    botDescription: "Your personalised AI banking companion",
-    color: "#F26D21",
-    variant: "solid",
-    themeMode: "light",
-    fontFamily: "Mulish",
-    radius: 2
-  }
-})
-
-</script>
-
-<!-- SEND PROMPT -->
-
-<script>
+  hostUrl: "https://cdn.botpress.cloud/webchat/v2.5",
+  messagingUrl: "https://messaging.botpress.cloud",
+  showPoweredBy: false,
+  theme: "light",
+  themeColor: "#F26D21",
+  botName: "iZeni",
+  stylesheet: "",
+  enableConversationDeletion: false
+});
 
 function sendPrompt(message){
 
-window.botpress.open();
+window.botpressWebChat.open();
 
 setTimeout(() => {
 
-window.botpress.sendMessage(message)
+window.botpressWebChat.sendPayload({
+type:"text",
+text:message
+});
 
-},800)
+},1000);
 
 }
 
