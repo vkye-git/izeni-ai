@@ -384,22 +384,19 @@ if(window.botpressWebChat){
 /* OPEN CHAT */
 
 window.botpressWebChat.sendEvent({
-type:"show"
-});
+type: 'show'
+})
 
-/* WAIT & SEND MESSAGE */
+/* SEND USER MESSAGE */
 
 setTimeout(() => {
 
-window.botpressWebChat.sendEvent({
-type:"proactive-trigger",
-channel:"web",
-payload:{
-text:message
-}
-});
+window.botpressWebChat.sendPayload({
+type: 'text',
+text: message
+})
 
-},700);
+}, 800)
 
 }
 
