@@ -50,7 +50,7 @@ max-width:430px;
 display:flex;
 align-items:center;
 justify-content:center;
-gap:10px;
+gap:0px;
 
 margin-bottom:18px;
 
@@ -73,20 +73,6 @@ filter:blur(40px);
 top:-10px;
 }
 
-.ai-bot{
-
-width:55px;
-
-position:relative;
-
-z-index:2;
-
-animation:floatBot 5s ease-in-out infinite;
-
-filter:
-drop-shadow(0 0 22px rgba(255,255,255,0.28));
-}
-
 .ai-name{
 
 font-size:28px;
@@ -100,6 +86,24 @@ position:relative;
 z-index:2;
 
 line-height:1;
+
+margin-right:-2px;
+}
+
+.ai-bot{
+
+width:55px;
+
+position:relative;
+
+z-index:2;
+
+margin-left:-2px;
+
+animation:floatBot 5s ease-in-out infinite;
+
+filter:
+drop-shadow(0 0 22px rgba(255,255,255,0.28));
 }
 
 @keyframes floatBot{
@@ -218,123 +222,6 @@ transition:0.3s;
 transform:translateY(-2px);
 }
 
-.options{
-display:grid;
-gap:12px;
-}
-
-.option{
-
-padding:16px;
-
-border-radius:18px;
-
-background:rgba(255,255,255,0.12);
-
-border:1px solid rgba(255,255,255,0.12);
-
-cursor:pointer;
-
-transition:0.3s;
-
-font-weight:600;
-
-line-height:1.5;
-}
-
-.option:hover{
-
-background:rgba(255,255,255,0.2);
-
-transform:translateY(-2px);
-}
-
-.hidden{
-display:none;
-}
-
-.mobile-wrap{
-display:flex;
-align-items:center;
-background:white;
-border-radius:16px;
-overflow:hidden;
-margin-bottom:14px;
-}
-
-.prefix{
-padding:16px 14px;
-color:#666;
-font-weight:700;
-font-size:16px;
-background:#f4f4f4;
-}
-
-.mobile-input{
-border:none;
-margin:0;
-border-radius:0;
-flex:1;
-}
-
-.recommend-box{
-
-padding:18px;
-
-border-radius:20px;
-
-background:rgba(255,255,255,0.10);
-
-margin-bottom:20px;
-
-line-height:1.9;
-}
-
-.secure-note{
-font-size:13px;
-opacity:0.78;
-margin-top:-2px;
-margin-bottom:18px;
-line-height:1.5;
-}
-
-.explore-title{
-margin-top:24px;
-margin-bottom:12px;
-font-size:15px;
-font-weight:700;
-opacity:0.88;
-}
-
-.explore-grid{
-display:grid;
-gap:10px;
-}
-
-.explore-card{
-
-padding:14px 16px;
-
-border-radius:16px;
-
-background:rgba(255,255,255,0.10);
-
-border:1px solid rgba(255,255,255,0.10);
-
-font-size:14px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:0.3s;
-}
-
-.explore-card:hover{
-background:rgba(255,255,255,0.18);
-transform:translateY(-2px);
-}
-
 .error{
 
 font-size:14px;
@@ -354,19 +241,19 @@ opacity:0.92;
 
 <div class="container">
 
-<!-- STEP 1 -->
+<div class="card">
 
-<div class="card" id="step1">
+<!-- AI HEADER -->
 
 <div class="ai-wrap">
 
 <div class="ai-glow"></div>
 
-<img src="robot.png" class="ai-bot">
-
 <div class="ai-name">
 iZeni
 </div>
+
+<img src="robot.png" class="ai-bot">
 
 </div>
 
