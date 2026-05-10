@@ -43,6 +43,64 @@ width:100%;
 max-width:430px;
 }
 
+/* FLOATING AI */
+
+.ai-wrap{
+
+display:flex;
+justify-content:center;
+
+margin-bottom:18px;
+
+position:relative;
+}
+
+.ai-glow{
+
+position:absolute;
+
+width:120px;
+height:120px;
+
+background:rgba(255,255,255,0.16);
+
+border-radius:50%;
+
+filter:blur(40px);
+
+top:10px;
+}
+
+.ai-bot{
+
+width:90px;
+
+position:relative;
+
+z-index:2;
+
+animation:floatBot 5s ease-in-out infinite;
+
+filter:
+drop-shadow(0 0 22px rgba(255,255,255,0.28));
+}
+
+@keyframes floatBot{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
 .card{
 
 backdrop-filter:blur(18px);
@@ -287,6 +345,11 @@ opacity:0.92;
 
 <div class="card" id="step1">
 
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
+
 <h1>
 Let’s personalise your experience ✨
 </h1>
@@ -311,6 +374,11 @@ Continue
 <!-- STEP 2 -->
 
 <div class="card hidden" id="step2">
+
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
 
 <h1 id="welcomeTitle"></h1>
 
@@ -337,6 +405,11 @@ No, I’m exploring options
 <!-- STEP 3 -->
 
 <div class="card hidden" id="step3">
+
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
 
 <h1 id="salaryTitle"></h1>
 
@@ -374,6 +447,11 @@ onclick="saveSalary('Private')">
 
 <div class="card hidden" id="step4">
 
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
+
 <h1 id="interestTitle"></h1>
 
 <p>
@@ -409,6 +487,11 @@ Family & future planning
 <!-- STEP 5 -->
 
 <div class="card hidden" id="step5">
+
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
 
 <h1 id="recommendTitle"></h1>
 
@@ -460,6 +543,11 @@ Continue Exploring
 
 <div class="card hidden" id="step6">
 
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
+
 <h1 id="finalTitle"></h1>
 
 <p>
@@ -499,6 +587,11 @@ onclick="window.location.href='index.html'">
 <!-- EXISTING CUSTOMER FLOW -->
 
 <div class="card hidden" id="existingFlow">
+
+<div class="ai-wrap">
+<div class="ai-glow"></div>
+<img src="robot.png" class="ai-bot">
+</div>
 
 <h1 id="existingTitle"></h1>
 
@@ -690,8 +783,6 @@ alert(
 return;
 }
 
-/* DUPLICATE DETECTION */
-
 const existingLead =
 localStorage.getItem("izeni_" + mobile);
 
@@ -706,14 +797,10 @@ nextStep(5,6);
 return;
 }
 
-/* SAVE LEAD */
-
 localStorage.setItem(
 "izeni_" + mobile,
 "true"
 );
-
-/* GOOGLE SHEETS PAYLOAD */
 
 const payload = {
 
@@ -724,8 +811,6 @@ mobile:"+91" + mobile,
 email:email
 
 };
-
-/* GOOGLE SHEET WEB APP URL */
 
 fetch(
 "https://script.google.com/macros/s/PASTE-YOUR-URL-HERE/exec",
