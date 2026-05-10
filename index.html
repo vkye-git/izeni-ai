@@ -25,6 +25,14 @@ min-height:100vh;
 position:relative;
 }
 
+/* REMOVE BOTPRESS UI */
+
+.bpw-floating-button,
+.bpw-widget-btn,
+.bpw-layout{
+display:none !important;
+}
+
 /* HERO */
 
 .hero{
@@ -147,7 +155,7 @@ color:#ff6a00;
 font-weight:700;
 }
 
-/* STARTER GRID */
+/* STARTERS */
 
 .starter-grid{
 display:grid;
@@ -317,6 +325,7 @@ What would you like to explore today?
 <input
 type="text"
 id="userInput"
+name="userInput"
 placeholder="Ask iZeni anything..."
 onkeypress="handleKey(event)"
 >
@@ -342,6 +351,8 @@ botId:"fe3a4263-6168-4dc5-b7f1-1f30529baa12",
 clientId:"c2639e0b-48ce-4798-b906-70da72ce2ec8",
 
 configuration:{
+
+hideWidget:true,
 
 version:"v2",
 
@@ -377,19 +388,7 @@ footer:""
 
 });
 
-/* HIDE DEFAULT CHAT */
-
-window.botpress.on("webchat:ready",()=>{
-
-const iframe=document.querySelector("iframe");
-
-if(iframe){
-iframe.style.display="none";
-}
-
-});
-
-/* ADD USER MESSAGE */
+/* USER MESSAGE */
 
 function addUserMessage(text){
 
@@ -410,7 +409,7 @@ behavior:"smooth"
 
 }
 
-/* ADD BOT MESSAGE */
+/* BOT MESSAGE */
 
 function addBotMessage(text){
 
@@ -455,7 +454,9 @@ window.botpress.sendMessage(text);
 
 /* RECEIVE RESPONSE */
 
-window.botpress.on("message",(message)=>{
+window.botpress.on("message", (event) => {
+
+console.log(event);
 
 const loading=document.querySelector('[id^="loading-"]');
 
@@ -463,9 +464,13 @@ if(loading){
 loading.remove();
 }
 
-if(message.payload && message.payload.text){
+if(event && event.payload){
 
-addBotMessage(message.payload.text);
+if(event.payload.text){
+
+addBotMessage(event.payload.text);
+
+}
 
 }
 
