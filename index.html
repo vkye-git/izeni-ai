@@ -114,7 +114,7 @@ transform:translateY(0px);
 
 }
 
-/* CHAT SHELL */
+/* CHAT */
 
 .chat-shell{
 
@@ -137,7 +137,7 @@ margin-bottom:25px;
 
 }
 
-/* MESSAGE */
+/* MESSAGES */
 
 .bot-message,
 .user-message{
@@ -187,7 +187,7 @@ font-weight:700;
 
 }
 
-/* STARTER GRID */
+/* STARTERS */
 
 .starter-grid{
 
@@ -530,13 +530,19 @@ text:text
 
 const msgData = await msgResponse.json();
 
+console.log(msgData);
+
 /* REMOVE LOADING */
 
 document.getElementById(loadingId).remove();
 
-/* SHOW RESPONSE */
+/* RESPONSE PARSING */
 
-if(msgData.responses){
+if(msgData.message && msgData.message.payload){
+
+addBotMessage(msgData.message.payload.text);
+
+}else if(msgData.responses){
 
 msgData.responses.forEach(r=>{
 
@@ -550,7 +556,7 @@ addBotMessage(r.payload.text);
 
 }else{
 
-addBotMessage("I’m unable to respond right now.");
+addBotMessage("iZeni received the request but couldn't format the response.");
 
 }
 
