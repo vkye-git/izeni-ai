@@ -6,15 +6,13 @@ res.setHeader('Access-Control-Allow-Origin', '*')
 res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
-/* HANDLE PREFLIGHT */
-
 if(req.method === 'OPTIONS'){
 return res.status(200).end()
 }
 
 try {
 
-const response = await fetch(
+const openaiResponse = await fetch(
 'https://api.openai.com/v1/chat/completions',
 {
 method:'POST',
@@ -26,7 +24,7 @@ headers:{
 
 body:JSON.stringify({
 
-model:'gpt-4.1-mini',
+model:'gpt-4o-mini',
 
 messages:req.body.messages,
 
@@ -37,16 +35,20 @@ temperature:0.7
 }
 )
 
-const data = await response.json()
+const data = await openaiResponse.json()
 
-res.status(200).json(data)
+/* RETURN COMPLETE RESPONSE */
+
+return res.status(200).json(data)
 
 } catch(error){
 
-console.log(error)
+return res.status(500).json({
 
-res.status(500).json({
-error:'Server error'
+error:{
+message:error.message
+}
+
 })
 
 }
