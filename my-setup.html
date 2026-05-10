@@ -43,14 +43,14 @@ width:100%;
 max-width:430px;
 }
 
-/* FLOATING AI */
+/* AI HEADER */
 
 .ai-wrap{
 
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
+gap:10px;
 
 margin-bottom:18px;
 
@@ -70,12 +70,12 @@ border-radius:50%;
 
 filter:blur(40px);
 
-top:10px;
+top:-10px;
 }
 
 .ai-bot{
 
-width:90px;
+width:55px;
 
 position:relative;
 
@@ -89,17 +89,17 @@ drop-shadow(0 0 22px rgba(255,255,255,0.28));
 
 .ai-name{
 
-margin-top:10px;
-
-font-size:22px;
+font-size:28px;
 
 font-weight:800;
 
-letter-spacing:-0.8px;
+letter-spacing:-1px;
 
 position:relative;
 
 z-index:2;
+
+line-height:1;
 }
 
 @keyframes floatBot{
@@ -391,318 +391,9 @@ Continue
 
 </div>
 
-<!-- STEP 2 -->
-
-<div class="card hidden" id="step2">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="welcomeTitle"></h1>
-
-<p>
-Are you already banking with ICICI Bank?
-</p>
-
-<div class="options">
-
-<div class="option"
-onclick="existingCustomerJourney()">
-Yes, I already bank with ICICI
-</div>
-
-<div class="option"
-onclick="nextStep(2,3)">
-No, I’m exploring options
-</div>
-
-</div>
-
-</div>
-
-<!-- STEP 3 -->
-
-<div class="card hidden" id="step3">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="salaryTitle"></h1>
-
-<p>
-This helps personalise your banking experience better.
-</p>
-
-<div class="options">
-
-<div class="option"
-onclick="saveSalary('PowerPay')">
-Up to ₹1L/month
-</div>
-
-<div class="option"
-onclick="saveSalary('Select')">
-₹1L–3L/month
-</div>
-
-<div class="option"
-onclick="saveSalary('Wealth')">
-₹3L–8L/month
-</div>
-
-<div class="option"
-onclick="saveSalary('Private')">
-₹8L+/month
-</div>
-
-</div>
-
-</div>
-
-<!-- STEP 4 -->
-
-<div class="card hidden" id="step4">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="interestTitle"></h1>
-
-<p>
-Which experience feels closest to your lifestyle?
-</p>
-
-<div class="options">
-
-<div class="option"
-onclick="saveInterest('Lifestyle')">
-Lifestyle & premium experiences
-</div>
-
-<div class="option"
-onclick="saveInterest('Travel')">
-Travel & international spends
-</div>
-
-<div class="option"
-onclick="saveInterest('Investing')">
-Investments & wealth creation
-</div>
-
-<div class="option"
-onclick="saveInterest('Family')">
-Family & future planning
-</div>
-
-</div>
-
-</div>
-
-<!-- STEP 5 -->
-
-<div class="card hidden" id="step5">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="recommendTitle"></h1>
-
-<p>
-Curated around your lifestyle & financial goals ✨
-</p>
-
-<div
-class="recommend-box"
-id="recommendBox">
-</div>
-
-<p>
-Let’s make your experience even smarter.
-</p>
-
-<div class="mobile-wrap">
-
-<div class="prefix">
-+91
-</div>
-
-<input
-type="tel"
-maxlength="10"
-id="mobileInput"
-class="mobile-input"
-placeholder="Mobile number">
-
-</div>
-
-<input
-type="email"
-id="emailInput"
-placeholder="Work email (optional)">
-
-<div class="secure-note">
-Used only to personalise your experience better.
-</div>
-
-<button class="button"
-onclick="submitLead()">
-Continue Exploring
-</button>
-
-</div>
-
-<!-- STEP 6 -->
-
-<div class="card hidden" id="step6">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="finalTitle"></h1>
-
-<p>
-More experiences curated for you ✨
-</p>
-
-<div class="explore-title">
-You may also like
-</div>
-
-<div class="explore-grid">
-
-<div class="explore-card"
-onclick="window.location.href='wealth.html'">
-📈 Explore smarter investing
-</div>
-
-<div class="explore-card"
-onclick="window.location.href='milestone.html'">
-🏠 Unlock milestone funding
-</div>
-
-<div class="explore-card"
-onclick="window.location.href='games.html'">
-🎮 Try interactive experiences
-</div>
-
-<div class="explore-card"
-onclick="window.location.href='index.html'">
-✨ Discover more experiences
-</div>
-
-</div>
-
-</div>
-
-<!-- EXISTING CUSTOMER FLOW -->
-
-<div class="card hidden" id="existingFlow">
-
-<div class="ai-wrap">
-
-<div class="ai-glow"></div>
-
-<img src="robot.png" class="ai-bot">
-
-<div class="ai-name">
-iZeni
-</div>
-
-</div>
-
-<h1 id="existingTitle"></h1>
-
-<p>
-What would you like to enhance today?
-</p>
-
-<div class="options">
-
-<div class="option">
-Upgrade my banking experience
-</div>
-
-<div class="option">
-Explore premium credit cards
-</div>
-
-<div class="option">
-Transfer existing loan
-</div>
-
-<div class="option">
-Grow investments smarter
-</div>
-
-<div class="option">
-Discover iMobile capabilities
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 <script>
-
-let userName = "";
-let salaryType = "";
-let userInterest = "";
-
-function nextStep(current,next){
-
-document.getElementById("step"+current)
-.classList.add("hidden");
-
-document.getElementById("step"+next)
-.classList.remove("hidden");
-}
 
 function saveName(){
 
@@ -723,170 +414,7 @@ document.getElementById("nameError")
 return;
 }
 
-userName = input;
-
-document.getElementById("welcomeTitle")
-.innerHTML =
-`Welcome, ${userName} ✨`;
-
-document.getElementById("salaryTitle")
-.innerHTML =
-`${userName}, what’s your monthly salary range?`;
-
-document.getElementById("interestTitle")
-.innerHTML =
-`${userName}, what are you looking to unlock next?`;
-
-nextStep(1,2);
-}
-
-function existingCustomerJourney(){
-
-document.getElementById("step2")
-.classList.add("hidden");
-
-document.getElementById("existingTitle")
-.innerHTML =
-`${userName}, let’s elevate your banking experience ✨`;
-
-document.getElementById("existingFlow")
-.classList.remove("hidden");
-}
-
-function saveSalary(type){
-
-salaryType = type;
-
-nextStep(3,4);
-}
-
-function saveInterest(interest){
-
-userInterest = interest;
-
-let recommendations = "";
-
-if(salaryType === "PowerPay"){
-
-recommendations = `
-✓ PowerPay Salary Account<br>
-✓ Rubyx Credit Card<br>
-✓ Amazon Pay Credit Card<br>
-✓ Everyday rewards & spends<br>
-✓ Smart iMobile banking
-`;
-
-}
-
-if(salaryType === "Select"){
-
-recommendations = `
-✓ Select Salary Account<br>
-✓ Rubyx / Sapphiro Credit Card<br>
-✓ Amazon Pay Credit Card<br>
-✓ Lifestyle & travel privileges<br>
-✓ Relationship-based offers
-`;
-
-}
-
-if(salaryType === "Wealth"){
-
-recommendations = `
-✓ Wealth Salary Account<br>
-✓ Sapphiro / Emeralde Card<br>
-✓ 3-in-1 Investment Account<br>
-✓ Wealth servicing benefits<br>
-✓ Premium investment experiences
-`;
-
-}
-
-if(salaryType === "Private"){
-
-recommendations = `
-✓ Private Banking Privileges<br>
-✓ Emeralde Private Metal Card<br>
-✓ Dedicated relationship support<br>
-✓ Bespoke wealth experiences<br>
-✓ Premium lifestyle access
-`;
-
-}
-
-document.getElementById("recommendTitle")
-.innerHTML =
-`${userName}, here’s what fits you best ✨`;
-
-document.getElementById("recommendBox")
-.innerHTML =
-recommendations;
-
-nextStep(4,5);
-}
-
-async function submitLead(){
-
-const mobile =
-document.getElementById("mobileInput").value;
-
-const email =
-document.getElementById("emailInput").value;
-
-const regex =
-/^[6-9]\d{9}$/;
-
-if(!regex.test(mobile)){
-
-alert(
-"Please enter a valid Indian mobile number to continue your personalised experience."
-);
-
-return;
-}
-
-const existingLead =
-localStorage.getItem("izeni_" + mobile);
-
-if(existingLead){
-
-document.getElementById("finalTitle")
-.innerHTML =
-`Welcome back, ${userName} 👋`;
-
-nextStep(5,6);
-
-return;
-}
-
-localStorage.setItem(
-"izeni_" + mobile,
-"true"
-);
-
-const payload = {
-
-name:userName,
-salary:salaryType,
-interest:userInterest,
-mobile:"+91" + mobile,
-email:email
-
-};
-
-fetch(
-"https://script.google.com/macros/s/PASTE-YOUR-URL-HERE/exec",
-{
-method:"POST",
-body:JSON.stringify(payload)
-}
-);
-
-document.getElementById("finalTitle")
-.innerHTML =
-`${userName}, your experience is getting smarter ✨`;
-
-nextStep(5,6);
+alert("Journey continues from here ✨");
 
 }
 
