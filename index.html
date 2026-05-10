@@ -54,7 +54,7 @@ margin-top:20px;
 filter:drop-shadow(0 0 40px rgba(255,255,255,0.35));
 }
 
-/* CHAT AREA */
+/* CHAT */
 
 .chat-shell{
 max-width:1100px;
@@ -287,7 +287,7 @@ Send
 <script>
 
 const TOKEN = "bp_bak_qIhp7YWgTU-ZtCqFecWf0ZwigATIAq2AjsFc"
-const BOT_ID = "fe3a4263-6168-4dc5-b7f1-1f30529baa12"
+const BOT_ID = "PASTE_YOUR_BOT_ID"
 
 let conversationId = null
 
@@ -361,21 +361,25 @@ typing.remove()
 async function createConversation(){
 
 const response = await fetch(
-'https://api.botpress.cloud/v1/chat/conversations',
+`https://chat.botpress.cloud/${BOT_ID}/converse`,
 {
 method:'POST',
 
 headers:{
 'Content-Type':'application/json',
-'x-bot-id':BOT_ID,
 'Authorization':`Bearer ${TOKEN}`
-}
+},
+
+body:JSON.stringify({
+userId:'web-user'
+})
+
 }
 )
 
 const data = await response.json()
 
-conversationId = data.conversation.id
+conversationId = data.conversationId
 
 }
 
@@ -394,23 +398,24 @@ await createConversation()
 }
 
 const response = await fetch(
-`https://api.botpress.cloud/v1/chat/conversations/${conversationId}/messages`,
+`https://chat.botpress.cloud/${BOT_ID}/converse`,
 {
 method:'POST',
 
 headers:{
 'Content-Type':'application/json',
-'x-bot-id':BOT_ID,
 'Authorization':`Bearer ${TOKEN}`
 },
 
 body:JSON.stringify({
 
+conversationId:conversationId,
+
+userId:'web-user',
+
 type:'text',
 
-payload:{
 text:text
-}
 
 })
 
@@ -422,7 +427,7 @@ const data = await response.json()
 removeTyping()
 
 const reply =
-data?.message?.payload?.text ||
+data?.responses?.[0]?.text ||
 "I couldn't generate a response."
 
 addBotMessage(reply)
