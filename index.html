@@ -32,52 +32,6 @@ min-height:100vh;
 position:relative;
 }
 
-/* AI CIRCUIT BACKGROUND */
-
-body::before{
-content:"";
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background-image:
-
-url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1200' viewBox='0 0 1200 1200'%3E%3Cg stroke='rgba(255,255,255,0.14)' stroke-width='3' fill='none' stroke-linecap='round'%3E%3Cpath d='M0 220 H280 L420 360 H780 L980 160 H1200'/%3E%3Cpath d='M0 320 H500 L620 200 H900 L1200 520'/%3E%3Cpath d='M0 520 H350 L520 700 H840 L1200 300'/%3E%3Cpath d='M0 760 H420 L620 980 H980 L1200 700'/%3E%3Cpath d='M0 920 H280 L500 1120'/%3E%3Ccircle cx='280' cy='220' r='8' fill='rgba(255,255,255,0.18)'/%3E%3Ccircle cx='780' cy='360' r='8' fill='rgba(255,255,255,0.18)'/%3E%3Ccircle cx='980' cy='160' r='8' fill='rgba(255,255,255,0.18)'/%3E%3Ccircle cx='620' cy='200' r='8' fill='rgba(255,255,255,0.18)'/%3E%3Ccircle cx='520' cy='700' r='8' fill='rgba(255,255,255,0.18)'/%3E%3Ccircle cx='620' cy='980' r='8' fill='rgba(255,255,255,0.18)'/%3E%3C/g%3E%3C/svg%3E");
-
-background-size:cover;
-
-opacity:0.45;
-
-pointer-events:none;
-
-z-index:0;
-
-animation:circuitFloat 20s ease-in-out infinite alternate;
-}
-
-/* CIRCUIT MOVEMENT */
-
-@keyframes circuitFloat{
-
-0%{
-transform:
-translateY(0px)
-translateX(0px);
-}
-
-100%{
-transform:
-translateY(-20px)
-translateX(-10px);
-}
-
-}
-
 /* HERO */
 
 .hero{
@@ -182,7 +136,7 @@ position:relative;
 z-index:2;
 }
 
-/* GLASSMORPHISM CARDS */
+/* GLASS CARDS */
 
 .card{
 
@@ -258,10 +212,29 @@ box-shadow:
 0 20px 40px rgba(0,0,0,0.18);
 }
 
+/* CARD HEADER */
+
+.card-header{
+display:flex;
+align-items:center;
+margin-bottom:14px;
+}
+
+/* 3D ICONS */
+
+.icon{
+width:42px;
+height:42px;
+margin-right:14px;
+
+filter:
+drop-shadow(0 4px 12px rgba(255,255,255,0.22));
+}
+
 /* CARD TEXT */
 
 .card h2{
-margin:0 0 14px;
+margin:0;
 
 font-size:26px;
 
@@ -348,24 +321,68 @@ max-width:900px;
 
 <div class="cards">
 
+<!-- CARD 1 -->
+
 <div class="card">
-<h2>🏦 Discover My Setup</h2>
+
+<div class="card-header">
+
+<img src="wallet.png" class="icon">
+
+<h2>Discover My Setup</h2>
+
+</div>
+
 <p>Personalised banking built around me</p>
+
 </div>
 
+<!-- CARD 2 -->
+
 <div class="card">
-<h2>📈 Grow My Wealth</h2>
+
+<div class="card-header">
+
+<img src="growth.png" class="icon">
+
+<h2>Grow My Wealth</h2>
+
+</div>
+
 <p>Smarter investing for my future goals</p>
+
 </div>
 
+<!-- CARD 3 -->
+
 <div class="card">
-<h2>🏠 Plan My Next Milestone</h2>
+
+<div class="card-header">
+
+<img src="milestone.png" class="icon">
+
+<h2>Plan My Next Milestone</h2>
+
+</div>
+
 <p>Funding solutions tailored to my plans</p>
+
 </div>
 
+<!-- CARD 4 -->
+
 <div class="card">
-<h2>🎮 Play & Discover</h2>
+
+<div class="card-header">
+
+<img src="play.png" class="icon">
+
+<h2>Play & Discover</h2>
+
+</div>
+
 <p>Interactive experiences around banking, money & fraud awareness</p>
+
 </div>
 
 </div>
