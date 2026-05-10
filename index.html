@@ -431,6 +431,9 @@ Send
 
 <script>
 
+const API_KEY = "bp_bak_qIhp7YWgTU-ZtCqFecWf0ZwigATIAq2AjsFc";
+const BOT_ID = "fe3a4263-6168-4dc5-b7f1-1f30529baa12";
+
 function addUserMessage(text){
 
 const chat=document.getElementById('chatWindow');
@@ -469,17 +472,104 @@ behavior:'smooth'
 
 }
 
-function sendMessage(text){
+async function sendMessage(text){
 
 addUserMessage(text);
 
-/* TEMP AI RESPONSE */
+/* LOADING */
 
-setTimeout(()=>{
+const loadingId = "loading-" + Date.now();
 
-addBotMessage("✨ iZeni is intelligently building this journey for you.");
+const chat=document.getElementById('chatWindow');
 
-},1000);
+chat.innerHTML += `
+<div class="bot-message" id="${loadingId}">
+<div class="message-bubble">
+✨ iZeni is thinking...
+</div>
+</div>
+`;
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:'smooth'
+});
+
+try{
+
+/* CREATE CONVERSATION */
+
+const convResponse = await fetch(
+'https://api.botpress.cloud/v1/chat/conversations',
+{
+method:'POST',
+headers:{
+'Authorization':`Bearer ${API_KEY}`,
+'x-bot-id':BOT_ID,
+'Content-Type':'application/json'
+}
+}
+);
+
+const convData = await convResponse.json();
+
+const conversationId = convData.id;
+
+/* SEND MESSAGE */
+
+const msgResponse = await fetch(
+`https://api.botpress.cloud/v1/chat/conversations/${conversationId}/messages`,
+{
+method:'POST',
+headers:{
+'Authorization':`Bearer ${API_KEY}`,
+'x-bot-id':BOT_ID,
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+type:'text',
+payload:{
+text:text
+}
+})
+}
+);
+
+const msgData = await msgResponse.json();
+
+/* REMOVE LOADING */
+
+document.getElementById(loadingId).remove();
+
+/* SHOW RESPONSE */
+
+if(msgData.responses && msgData.responses.length > 0){
+
+msgData.responses.forEach(response => {
+
+if(response.payload && response.payload.text){
+
+addBotMessage(response.payload.text);
+
+}
+
+});
+
+}else{
+
+addBotMessage("I’m unable to respond right now.");
+
+}
+
+}catch(error){
+
+document.getElementById(loadingId).remove();
+
+addBotMessage("Something went wrong while connecting to iZeni.");
+
+console.log(error);
+
+}
 
 }
 
