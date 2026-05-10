@@ -361,35 +361,25 @@ Powered by iZeni AI Experience
 
 <!-- BOTPRESS -->
 
-<script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+
+<script src="https://files.bpcontent.cloud/2026/05/09/14/20260509140531-GOAB7DHN.js"></script>
 
 <script>
 
-window.botpressWebChat.init({
-  botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
-  clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8",
-  hostUrl: "https://cdn.botpress.cloud/webchat/v2.5",
-  messagingUrl: "https://messaging.botpress.cloud",
-  showPoweredBy: false,
-  theme: "light",
-  themeColor: "#F26D21",
-  botName: "iZeni",
-  stylesheet: "",
-  enableConversationDeletion: false
-});
-
 function sendPrompt(message){
 
-window.botpressWebChat.open();
+if(window.botpress){
+
+window.botpress.open();
 
 setTimeout(() => {
 
-window.botpressWebChat.sendPayload({
-type:"text",
-text:message
-});
+window.botpress.sendMessage(message);
 
 },1000);
+
+}
 
 }
 
