@@ -463,13 +463,15 @@ removeTyping()
 let reply = "Unable to generate response."
 
 if(
-data.choices &&
-data.choices.length > 0 &&
-data.choices[0].message &&
-data.choices[0].message.content
+data.candidates &&
+data.candidates.length > 0
 ){
 
-reply = data.choices[0].message.content
+reply =
+data.candidates[0]
+.content
+.parts[0]
+.text
 
 }
 
