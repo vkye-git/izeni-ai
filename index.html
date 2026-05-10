@@ -426,9 +426,19 @@ const data = await response.json()
 
 removeTyping()
 
-const reply =
-data?.responses?.[0]?.text ||
-"I couldn't generate a response."
+let reply = "I couldn't generate a response."
+
+if(data.responses && data.responses.length > 0){
+
+const firstResponse = data.responses[0]
+
+reply =
+firstResponse.payload?.text ||
+firstResponse.text ||
+firstResponse.payload ||
+JSON.stringify(firstResponse)
+
+}
 
 addBotMessage(reply)
 
