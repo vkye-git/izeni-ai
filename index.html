@@ -137,7 +137,7 @@ margin-bottom:25px;
 
 }
 
-/* MESSAGES */
+/* MESSAGE */
 
 .bot-message,
 .user-message{
@@ -415,15 +415,30 @@ Send
 
 </div>
 
-<!-- SCRIPT -->
+<!-- BOTPRESS SDK -->
+
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
 
 <script>
 
-const API_KEY = "bp_bak_qIhp7YWgTU-ZtCqFecWf0ZwigATIAq2AjsFc";
+window.botpress.init({
+  botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
+  clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8"
+});
 
-const BOT_ID = "fe3a4263-6168-4dc5-b7f1-1f30529baa12";
+/* HIDE DEFAULT CHAT */
 
-let conversationId = null;
+window.botpress.on("webchat:ready", () => {
+
+const iframe = document.querySelector("iframe");
+
+if(iframe){
+iframe.style.display = "none";
+}
+
+});
+
+/* USER MESSAGE */
 
 function addUserMessage(text){
 
@@ -444,6 +459,8 @@ behavior:'smooth'
 
 }
 
+/* BOT MESSAGE */
+
 function addBotMessage(text){
 
 const chat=document.getElementById('chatWindow');
@@ -463,6 +480,8 @@ behavior:'smooth'
 
 }
 
+/* SEND MESSAGE */
+
 async function sendMessage(text){
 
 addUserMessage(text);
@@ -481,96 +500,27 @@ chat.innerHTML += `
 </div>
 `;
 
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:'smooth'
-});
+/* SEND TO AI */
 
-try{
+window.botpress.sendMessage(text);
 
-/* CREATE CONVERSATION */
+/* LISTEN RESPONSE */
 
-if(!conversationId){
+window.botpress.on("message", (message) => {
 
-const convResponse = await fetch(
-`https://chat.botpress.cloud/${BOT_ID}/conversations`,
-{
-method:'POST',
-headers:{
-'Content-Type':'application/json',
-'x-user-key':API_KEY
-}
-}
-);
+document.getElementById(loadingId)?.remove();
 
-const convData = await convResponse.json();
+if(message.payload && message.payload.text){
 
-conversationId = convData.id;
-
-}
-
-/* SEND MESSAGE */
-
-const msgResponse = await fetch(
-`https://chat.botpress.cloud/${BOT_ID}/conversations/${conversationId}/messages`,
-{
-method:'POST',
-headers:{
-'Content-Type':'application/json',
-'x-user-key':API_KEY
-},
-body:JSON.stringify({
-payload:{
-type:'text',
-text:text
-}
-})
-}
-);
-
-const msgData = await msgResponse.json();
-
-console.log(msgData);
-
-/* REMOVE LOADING */
-
-document.getElementById(loadingId).remove();
-
-/* RESPONSE PARSING */
-
-if(msgData.message && msgData.message.payload){
-
-addBotMessage(msgData.message.payload.text);
-
-}else if(msgData.responses){
-
-msgData.responses.forEach(r=>{
-
-if(r.payload && r.payload.text){
-
-addBotMessage(r.payload.text);
+addBotMessage(message.payload.text);
 
 }
 
 });
 
-}else{
-
-addBotMessage("iZeni received the request but couldn't format the response.");
-
 }
 
-}catch(error){
-
-document.getElementById(loadingId).remove();
-
-addBotMessage("Connection issue while reaching iZeni.");
-
-console.log(error);
-
-}
-
-}
+/* INPUT */
 
 function submitInput(){
 
