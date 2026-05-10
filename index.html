@@ -180,8 +180,6 @@ flex-direction:column;
 justify-content:center;
 }
 
-/* CARD INNER GLOW */
-
 .card::before{
 
 content:"";
@@ -200,8 +198,6 @@ right:-100px;
 
 filter:blur(20px);
 }
-
-/* CARD HOVER */
 
 .card:hover{
 
@@ -224,13 +220,9 @@ box-shadow:
 
 .card h2{
 margin:0;
-
 font-size:22px;
-
 font-weight:700;
-
 letter-spacing:-0.5px;
-
 line-height:1.4;
 }
 
@@ -306,7 +298,7 @@ Your personalised AI banking companion
 <div class="cards">
 
 <div class="card"
-onclick="window.botpress.open()">
+onclick="sendPrompt('Let iZeni craft an ideal banking setup')">
 
 <h2>
 🏦 Let iZeni craft an ideal banking setup
@@ -367,12 +359,31 @@ onclick="sendPrompt('Unlock hidden iMobile capabilities')">
 Powered by iZeni AI Experience
 </div>
 
+<!-- BOTPRESS CONTAINER -->
+
+<div id="bp-web-widget-container"></div>
+
 <!-- BOTPRESS -->
 
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/05/09/14/20260509140531-GOAB7DHN.js"></script>
-    
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+
+<script>
+
+window.botpress.init({
+  botId: "fe3a4263-6168-4dc5-b7f1-1f30529baa12",
+  clientId: "c2639e0b-48ce-4798-b906-70da72ce2ec8",
+  configuration: {
+    botName: "iZeni",
+    botDescription: "Your personalised AI banking companion",
+    color: "#F26D21",
+    variant: "solid",
+    themeMode: "light",
+    fontFamily: "Mulish",
+    radius: 2
+  }
+})
+
+</script>
 
 <!-- SEND PROMPT -->
 
@@ -380,38 +391,18 @@ Powered by iZeni AI Experience
 
 function sendPrompt(message){
 
-if(window.botpressWebChat){
-
-/* OPEN CHAT */
-
-window.botpressWebChat.sendEvent({
-type: 'show'
-})
-
-/* SEND USER MESSAGE */
+window.botpress.open();
 
 setTimeout(() => {
 
-window.botpressWebChat.sendPayload({
-type: 'text',
-text: message
-})
+window.botpress.sendMessage(message)
 
-}, 800)
-
-}
+},800)
 
 }
 
 </script>
 
-
-  <script>
-
-console.log(window.botpress)
-
-</script>
-  
 </body>
 
 </html>
