@@ -16,13 +16,13 @@ const userMessage =
 req.body.messages[req.body.messages.length - 1].content
 
 const response = await fetch(
-'https://api-inference.huggingface.co/models/microsoft/DialoGPT-large',
+'https://api-inference.huggingface.co/models/google/flan-t5-large',
 {
 method:'POST',
 
 headers:{
-'Content-Type':'application/json',
-'Authorization':`Bearer ${process.env.HF_TOKEN}`
+'Authorization':`Bearer ${process.env.HF_TOKEN}`,
+'Content-Type':'application/json'
 },
 
 body:JSON.stringify({
@@ -32,13 +32,35 @@ inputs:userMessage
 }
 )
 
-const data = await response.json()
+/* READ RAW TEXT FIRST */
+
+const rawText = await response.text()
+
+console.log(rawText)
+
+/* TRY PARSE JSON */
+
+let data
+
+try{
+
+data = JSON.parse(rawText)
+
+}catch(parseError){
+
+return res.status(500).json({
+
+error:{
+message:rawText
+}
+
+})
+
+}
 
 return res.status(200).json(data)
 
 } catch(error){
-
-console.log(error)
 
 return res.status(500).json({
 
