@@ -16,7 +16,7 @@ const userMessage =
 req.body.messages[req.body.messages.length - 1].content
 
 const response = await fetch(
-'https://router.huggingface.co/hf-inference/models/microsoft/DialoGPT-large',
+'https://router.huggingface.co/hf-inference/models/google/gemma-2-2b-it',
 {
 method:'POST',
 
