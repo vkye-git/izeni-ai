@@ -31,50 +31,35 @@ overflow-x:hidden;
 /* HERO */
 
 .hero{
-padding:40px 20px 10px;
+padding:20px 20px 0;
 text-align:center;
 position:relative;
 }
 
-.hero h1{
-font-size:82px;
-font-weight:900;
-margin:0;
-letter-spacing:-4px;
-}
-
-.hero p{
-font-size:22px;
-margin-top:15px;
-opacity:0.95;
-}
-
-/* ROBOT */
-
 .robot-wrap{
 position:relative;
-margin-top:10px;
+display:inline-block;
 }
 
 .robot-glow{
 position:absolute;
-width:340px;
-height:340px;
-background:rgba(255,255,255,0.18);
+width:180px;
+height:180px;
+background:rgba(255,255,255,0.20);
 border-radius:50%;
-filter:blur(70px);
+filter:blur(50px);
 left:50%;
 transform:translateX(-50%);
-top:20px;
+top:0;
 z-index:0;
 }
 
 .robot{
-width:220px;
+width:90px;
 position:relative;
 z-index:2;
 animation:float 5s ease-in-out infinite;
-filter:drop-shadow(0 0 45px rgba(255,255,255,0.35));
+filter:drop-shadow(0 0 25px rgba(255,255,255,0.45));
 }
 
 @keyframes float{
@@ -84,7 +69,7 @@ transform:translateY(0px);
 }
 
 50%{
-transform:translateY(-14px);
+transform:translateY(-10px);
 }
 
 100%{
@@ -97,7 +82,7 @@ transform:translateY(0px);
 
 .chat-shell{
 max-width:1100px;
-margin:20px auto 50px;
+margin:10px auto 50px;
 padding:0 20px;
 }
 
@@ -113,6 +98,7 @@ margin-bottom:25px;
 .bot-message,
 .user-message{
 display:flex;
+width:100%;
 }
 
 .bot-message{
@@ -125,14 +111,14 @@ justify-content:flex-end;
 
 .message-bubble{
 max-width:78%;
-padding:18px 22px;
-border-radius:24px;
-font-size:16px;
-line-height:1.7;
+padding:22px 24px;
+border-radius:28px;
+font-size:18px;
+line-height:1.8;
 backdrop-filter:blur(18px);
-background:rgba(255,255,255,0.16);
+background:rgba(255,255,255,0.15);
 border:1px solid rgba(255,255,255,0.15);
-box-shadow:0 10px 30px rgba(0,0,0,0.10);
+box-shadow:0 12px 30px rgba(0,0,0,0.12);
 white-space:pre-wrap;
 }
 
@@ -147,15 +133,16 @@ font-weight:700;
 .starter-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:16px;
+gap:18px;
 margin-bottom:28px;
 }
 
 .starter-card{
-padding:22px;
-border-radius:24px;
+padding:24px;
+border-radius:22px;
 cursor:pointer;
 font-weight:700;
+font-size:18px;
 line-height:1.5;
 backdrop-filter:blur(18px);
 background:rgba(255,255,255,0.14);
@@ -180,15 +167,15 @@ margin-bottom:40px;
 flex:1;
 border:none;
 outline:none;
-padding:20px;
+padding:22px;
 border-radius:20px;
-font-size:16px;
+font-size:17px;
 font-family:'Mulish',sans-serif;
 }
 
 .input-bar button{
 border:none;
-padding:0 28px;
+padding:0 30px;
 border-radius:20px;
 background:white;
 color:#ff6a00;
@@ -201,24 +188,13 @@ cursor:pointer;
 
 @media(max-width:768px){
 
-.hero h1{
-font-size:58px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.robot{
-width:180px;
-}
-
 .starter-grid{
 grid-template-columns:1fr;
 }
 
 .message-bubble{
-max-width:90%;
+max-width:92%;
+font-size:16px;
 }
 
 .input-bar{
@@ -237,15 +213,9 @@ height:58px;
 
 <body>
 
-<!-- HERO -->
+<!-- ROBOT -->
 
 <div class="hero">
-
-<h1>iZeni</h1>
-
-<p>
-Your personalised AI banking companion
-</p>
 
 <div class="robot-wrap">
 
@@ -267,9 +237,13 @@ Your personalised AI banking companion
 
 <div class="message-bubble">
 
-✨ Hi, I’m <strong>iZeni</strong>.<br><br>
+✨ Hi, I’m <strong>iZeni</strong>.
+
+<br><br>
 
 I can help you discover smarter banking setups, premium cards, wealth journeys, travel benefits, fraud awareness games and much more.
+
+<br><br>
 
 What would you like to explore today?
 
@@ -407,7 +381,13 @@ addTyping()
 
 try{
 
-const response = await fetch(
+const timeoutPromise = new Promise((_, reject) =>
+setTimeout(() => reject(new Error('Timeout')), 45000)
+)
+
+const response = await Promise.race([
+
+fetch(
 API_URL,
 {
 method:'POST',
@@ -421,29 +401,6 @@ body:JSON.stringify({
 messages:[
 
 {
-role:'system',
-content:`
-You are iZeni — a premium AI-powered banking companion.
-
-Your tone:
-- premium
-- intelligent
-- warm
-- concise
-- consultative
-
-You help users with:
-- banking
-- investments
-- wealth creation
-- travel
-- premium cards
-- fraud awareness
-- digital banking
-`
-},
-
-{
 role:'user',
 content:text
 }
@@ -453,7 +410,11 @@ content:text
 })
 
 }
-)
+),
+
+timeoutPromise
+
+])
 
 const data = await response.json()
 
@@ -461,30 +422,23 @@ console.log(data)
 
 removeTyping()
 
-let reply = "Unable to generate response."
+let reply = "iZeni could not generate a response."
 
-console.log(data)
-
-if(data.result){
+if(data.success === true){
 
 reply =
-data.result.response ||
-data.result.text ||
-JSON.stringify(data.result)
+data.result?.response ||
+data.result?.text ||
+data.response ||
+"iZeni is still thinking. Please try again."
 
 }
 
 if(data.errors && data.errors.length > 0){
 
-reply = JSON.stringify(data.errors)
-
-}
-
-if(data.error){
-
 reply =
-data.error.message ||
-JSON.stringify(data.error)
+data.errors[0].message ||
+JSON.stringify(data.errors)
 
 }
 
