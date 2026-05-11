@@ -16,17 +16,44 @@ const userMessage =
 req.body.messages[req.body.messages.length - 1].content
 
 const response = await fetch(
-'https://router.huggingface.co/hf-inference/models/google/gemma-2-2b-it',
+`https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ACCOUNT_ID}/ai/run/@cf/meta/llama-3-8b-instruct`,
 {
 method:'POST',
 
 headers:{
-'Authorization':`Bearer ${process.env.HF_TOKEN}`,
+'Authorization':`Bearer ${process.env.CF_API_TOKEN}`,
 'Content-Type':'application/json'
 },
 
 body:JSON.stringify({
-inputs:userMessage
+
+messages:[
+{
+role:'system',
+content:`
+You are iZeni, a premium AI-powered banking companion.
+
+Tone:
+- premium
+- intelligent
+- warm
+- concise
+
+Help users with:
+- banking
+- wealth
+- investments
+- premium cards
+- travel
+- digital banking
+`
+},
+{
+role:'user',
+content:userMessage
+}
+]
+
 })
 
 }
@@ -34,9 +61,13 @@ inputs:userMessage
 
 const data = await response.json()
 
+console.log(data)
+
 return res.status(200).json(data)
 
 } catch(error){
+
+console.log(error)
 
 return res.status(500).json({
 
