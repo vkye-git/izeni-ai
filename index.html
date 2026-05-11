@@ -133,6 +133,7 @@ backdrop-filter:blur(18px);
 background:rgba(255,255,255,0.16);
 border:1px solid rgba(255,255,255,0.15);
 box-shadow:0 10px 30px rgba(0,0,0,0.10);
+white-space:pre-wrap;
 }
 
 .user-message .message-bubble{
@@ -282,27 +283,27 @@ What would you like to explore today?
 
 <div class="starter-grid">
 
-<div class="starter-card" onclick="sendMessage('Let iZeni craft an ideal banking setup')">
+<div class="starter-card" onclick="sendMessage('Help me choose the right banking setup')">
 🏦 Let iZeni craft an ideal banking setup
 </div>
 
-<div class="starter-card" onclick="sendMessage('Discover better ways to build wealth')">
+<div class="starter-card" onclick="sendMessage('Suggest smart wealth creation ideas')">
 📈 Discover better ways to build wealth
 </div>
 
-<div class="starter-card" onclick="sendMessage('Find your perfect premium card match')">
+<div class="starter-card" onclick="sendMessage('Suggest the best premium credit card for me')">
 💳 Find your perfect premium card match
 </div>
 
-<div class="starter-card" onclick="sendMessage('Make international travel more effortless')">
+<div class="starter-card" onclick="sendMessage('Help me with travel and forex benefits')">
 ✈️ Make international travel more effortless
 </div>
 
-<div class="starter-card" onclick="sendMessage('Put your fraud awareness to the test')">
+<div class="starter-card" onclick="sendMessage('Teach me about fraud awareness')">
 🎮 Put your fraud awareness to the test
 </div>
 
-<div class="starter-card" onclick="sendMessage('Unlock hidden iMobile capabilities')">
+<div class="starter-card" onclick="sendMessage('Show useful iMobile features')">
 📱 Unlock hidden iMobile capabilities
 </div>
 
@@ -428,15 +429,15 @@ Your tone:
 - premium
 - intelligent
 - warm
-- consultative
 - concise
+- consultative
 
 You help users with:
-- banking setup
-- wealth creation
-- premium cards
+- banking
 - investments
+- wealth creation
 - travel
+- premium cards
 - fraud awareness
 - digital banking
 `
@@ -462,16 +463,9 @@ removeTyping()
 
 let reply = "Unable to generate response."
 
-if(
-data.candidates &&
-data.candidates.length > 0
-){
+if(Array.isArray(data) && data[0]?.generated_text){
 
-reply =
-data.candidates[0]
-.content
-.parts[0]
-.text
+reply = data[0].generated_text
 
 }
 
