@@ -463,9 +463,12 @@ removeTyping()
 
 let reply = "Unable to generate response."
 
-if(Array.isArray(data) && data[0]?.generated_text){
+if(Array.isArray(data) && data[0]){
 
-reply = data[0].generated_text
+reply =
+data[0].generated_text ||
+data[0].summary_text ||
+JSON.stringify(data[0])
 
 }
 
