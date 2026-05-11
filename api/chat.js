@@ -16,7 +16,7 @@ const userMessage =
 req.body.messages[req.body.messages.length - 1].content
 
 const response = await fetch(
-'https://api-inference.huggingface.co/models/google/flan-t5-large',
+'https://router.huggingface.co/hf-inference/models/microsoft/DialoGPT-large',
 {
 method:'POST',
 
@@ -32,31 +32,7 @@ inputs:userMessage
 }
 )
 
-/* READ RAW TEXT FIRST */
-
-const rawText = await response.text()
-
-console.log(rawText)
-
-/* TRY PARSE JSON */
-
-let data
-
-try{
-
-data = JSON.parse(rawText)
-
-}catch(parseError){
-
-return res.status(500).json({
-
-error:{
-message:rawText
-}
-
-})
-
-}
+const data = await response.json()
 
 return res.status(200).json(data)
 
