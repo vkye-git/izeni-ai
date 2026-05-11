@@ -463,13 +463,18 @@ removeTyping()
 
 let reply = "Unable to generate response."
 
-if(data.result && data.result.response){
+console.log(data)
 
-reply = data.result.response
+if(data.result){
+
+reply =
+data.result.response ||
+data.result.text ||
+JSON.stringify(data.result)
 
 }
 
-if(data.errors){
+if(data.errors && data.errors.length > 0){
 
 reply = JSON.stringify(data.errors)
 
