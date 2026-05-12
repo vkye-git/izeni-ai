@@ -85,12 +85,22 @@ const data = await response.json()
 
 console.log(data)
 
+  console.log(
+'GROQ RESPONSE:',
+JSON.stringify(data, null, 2)
+)
+  
 return res.status(200).json({
 success:true,
 result:{
 response:
+  
+response:
 data.choices?.[0]?.message?.content ||
-'I could not generate a response.'
+data.choices?.[0]?.text ||
+JSON.stringify(data)
+
+  
 }
 })
 
