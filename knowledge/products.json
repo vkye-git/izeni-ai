@@ -1,0 +1,66 @@
+[
+{
+"id":"salary_account",
+"name":"Salary Account",
+"category":"Banking",
+"ideal_for":[
+"salaried professionals",
+"Bank of America employees"
+],
+"benefits":[
+"zero balance account",
+"premium debit card",
+"pre-approved loan offers",
+"family banking benefits",
+"lounge access"
+]
+},
+
+{
+"id":"wealth_account",
+"name":"Wealth Management",
+"category":"Wealth",
+"ideal_for":[
+"affluent professionals",
+"investors"
+],
+"benefits":[
+"dedicated relationship manager",
+"investment advisory",
+"wealth insights",
+"premium banking experiences"
+]
+},
+
+{
+"id":"sapphiro_card",
+"name":"Sapphiro Credit Card",
+"category":"Cards",
+"ideal_for":[
+"frequent travellers",
+"premium lifestyle"
+],
+"benefits":[
+"airport lounge access",
+"golf privileges",
+"movie benefits",
+"reward points"
+]
+},
+
+{
+"id":"imobile",
+"name":"iMobile",
+"category":"Digital Banking",
+"ideal_for":[
+"digital-first users"
+],
+"benefits":[
+"SmartLock",
+"UPI payments",
+"investment dashboard",
+"FASTag recharge",
+"forex management"
+]
+}
+]
