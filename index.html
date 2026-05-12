@@ -628,9 +628,13 @@ headers:{
 },
 
 body:JSON.stringify({
-
-messages:conversationHistory
-
+messages:conversationHistory,
+leadData:{
+name:userProfile.name,
+journey:userProfile.selectedJourney,
+query:text,
+persona:userProfile.persona
+}
 })
 
 }
