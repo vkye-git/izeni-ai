@@ -1,11 +1,10 @@
-```javascript
 const systemPrompt =
 require('../knowledge/systemPrompt')
 
 const products =
 require('../knowledge/products.json')
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
 
 res.setHeader('Access-Control-Allow-Origin', '*')
 res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -43,14 +42,11 @@ Available Banking Knowledge:
 
 ${productKnowledge}
 
-Use this knowledge intelligently.
-
-Keep responses:
-- concise
-- premium
-- conversational
-
-Ask only ONE meaningful question at a time.
+Instructions:
+- Keep responses concise
+- Ask one question at a time
+- Sound premium and conversational
+- Recommend contextually
 
 `
 },
@@ -87,6 +83,8 @@ max_tokens:180
 
 const data = await response.json()
 
+console.log(data)
+
 return res.status(200).json({
 success:true,
 result:{
@@ -98,6 +96,8 @@ data.choices?.[0]?.message?.content ||
 
 }catch(error){
 
+console.log(error)
+
 return res.status(500).json({
 success:false,
 errors:[{
@@ -108,4 +108,3 @@ message:error.message
 }
 
 }
-```
