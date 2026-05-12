@@ -1,66 +1,266 @@
-[
 {
-"id":"salary_account",
-"name":"Salary Account",
-"category":"Banking",
-"ideal_for":[
-"salaried professionals",
-"Bank of America employees"
-],
-"benefits":[
-"zero balance account",
-"premium debit card",
-"pre-approved loan offers",
-"family banking benefits",
-"lounge access"
-]
-},
+  "accounts": [
+    {
+      "id": "power_pay",
+      "name": "Power Pay Account",
+      "salary_range": "<1L",
+      "ideal_for": [
+        "young professionals",
+        "early career employees",
+        "salary account users"
+      ],
+      "benefits": [
+        "No minimum balance requirement",
+        "Unlimited ATM transactions at ICICI Bank ATMs",
+        "Complimentary NEFT IMPS and RTGS transactions",
+        "Built in Demat and Trading Account with first year AMC waiver",
+        "Complimentary air insurance of Rs 40 lakh",
+        "Complimentary personal accident insurance of Rs 10 lakh"
+      ],
+      "recommended_card": "coral_credit_card"
+    },
 
-{
-"id":"wealth_account",
-"name":"Wealth Management",
-"category":"Wealth",
-"ideal_for":[
-"affluent professionals",
-"investors"
-],
-"benefits":[
-"dedicated relationship manager",
-"investment advisory",
-"wealth insights",
-"premium banking experiences"
-]
-},
+    {
+      "id": "select_banking",
+      "name": "Select Banking",
+      "salary_range": "1L-3L",
+      "ideal_for": [
+        "mid senior professionals",
+        "family focused users",
+        "digitally active professionals"
+      ],
+      "benefits": [
+        "No minimum balance requirement",
+        "Unlimited ATM transactions",
+        "Family banking for up to 5 members",
+        "Preferential offerings on Demat and loan processing fees",
+        "Airport lounge access through debit card",
+        "Complimentary insurance cover"
+      ],
+      "recommended_card": "rubyx_credit_card"
+    },
 
-{
-"id":"sapphiro_card",
-"name":"Sapphiro Credit Card",
-"category":"Cards",
-"ideal_for":[
-"frequent travellers",
-"premium lifestyle"
-],
-"benefits":[
-"airport lounge access",
-"golf privileges",
-"movie benefits",
-"reward points"
-]
-},
+    {
+      "id": "wealth_management",
+      "name": "Wealth Management",
+      "salary_range": "3L-8L",
+      "ideal_for": [
+        "affluent professionals",
+        "wealth creators",
+        "investment focused users"
+      ],
+      "benefits": [
+        "Portfolio Management Service",
+        "Will creation",
+        "Domestic and international airport lounge access",
+        "Priority branch and phone banking",
+        "Investment solutions based on risk profiling",
+        "Consolidated financial summary statement",
+        "Family banking benefits"
+      ],
+      "recommended_card": "sapphiro_credit_card"
+    },
 
-{
-"id":"imobile",
-"name":"iMobile",
-"category":"Digital Banking",
-"ideal_for":[
-"digital-first users"
-],
-"benefits":[
-"SmartLock",
-"UPI payments",
-"investment dashboard",
-"FASTag recharge",
-"forex management"
-]
+    {
+      "id": "private_banking",
+      "name": "Private Banking Account",
+      "salary_range": "8L+",
+      "ideal_for": [
+        "senior leadership",
+        "high net worth professionals",
+        "premium banking customers"
+      ],
+      "benefits": [
+        "Dedicated relationship manager",
+        "Investment specialist team",
+        "Succession planning",
+        "Will creation",
+        "Preferential remittance rates",
+        "Family banking for up to 5 members",
+        "Complimentary insurance benefits"
+      ],
+      "recommended_card": "sapphiro_credit_card"
+    }
+  ],
+
+  "credit_cards": [
+    {
+      "id": "coral_credit_card",
+      "name": "Coral Credit Card",
+      "ideal_for": [
+        "movie lovers",
+        "entry premium users",
+        "domestic travellers"
+      ],
+      "benefits": [
+        "1 complimentary domestic airport lounge access per quarter based on spend",
+        "Railway lounge access",
+        "25 percent discount on BookMyShow and INOX",
+        "Reward points on retail and utility spending"
+      ]
+    },
+
+    {
+      "id": "rubyx_credit_card",
+      "name": "Rubyx Credit Card",
+      "ideal_for": [
+        "frequent spenders",
+        "travellers",
+        "lifestyle focused users"
+      ],
+      "benefits": [
+        "2 complimentary airport lounge access per quarter based on spend",
+        "Railway lounge access",
+        "Movie discounts on BookMyShow and INOX",
+        "Reward points on international and domestic spending",
+        "Fuel surcharge waiver"
+      ]
+    },
+
+    {
+      "id": "sapphiro_credit_card",
+      "name": "Sapphiro Credit Card",
+      "ideal_for": [
+        "international travellers",
+        "premium lifestyle users",
+        "high spenders"
+      ],
+      "benefits": [
+        "4 complimentary domestic airport lounge access per quarter",
+        "2 complimentary international lounge access per year",
+        "Golf rounds based on spend",
+        "Movie ticket buy one get one offer",
+        "High reward points on international spending",
+        "Fuel surcharge waiver"
+      ]
+    },
+
+    {
+      "id": "amazon_pay_card",
+      "name": "Amazon Pay Credit Card",
+      "ideal_for": [
+        "online shoppers",
+        "amazon users",
+        "cashback seekers"
+      ],
+      "benefits": [
+        "5 percent cashback for Prime members",
+        "3 percent cashback for non Prime members",
+        "1 percent cashback on all other spends",
+        "No joining fees",
+        "No annual fees",
+        "No cost EMI options"
+      ]
+    }
+  ],
+
+  "investments": [
+    {
+      "id": "salary_demat_trading",
+      "name": "3 in 1 Salary Demat Trading Account",
+      "benefits": [
+        "Free research and recommendations through ICICI Direct",
+        "Brokerage plan worth Rs 9999 at zero cost",
+        "Free e ATM benefit",
+        "Lowest interest rates from 9.69 percent for margin trading"
+      ]
+    },
+
+    {
+      "id": "nps",
+      "name": "National Pension Scheme",
+      "benefits": [
+        "Instant digital account opening",
+        "Portable across jobs and locations",
+        "Up to 4 partial withdrawals",
+        "No lock in for premature exit",
+        "Flexible maturity exit",
+        "Low cost retirement solution",
+        "Tax benefits under old and new regime"
+      ]
+    }
+  ],
+
+  "loans": [
+    {
+      "id": "home_loan",
+      "name": "Home Loan",
+      "benefits": [
+        "Zero prepayment charges on floating rate",
+        "Quick sanction",
+        "Long tenure up to 30 years",
+        "Enhanced eligibility for HNI customers"
+      ]
+    },
+
+    {
+      "id": "car_loan",
+      "name": "Car Loan",
+      "benefits": [
+        "Loan up to 100 percent on road price",
+        "Digital disbursement",
+        "Customised repayment options",
+        "No foreclosure charges"
+      ]
+    },
+
+    {
+      "id": "personal_loan",
+      "name": "Personal Loan",
+      "benefits": [
+        "Quick digital disbursal",
+        "Loan up to Rs 50 lakh",
+        "No security or guarantor required"
+      ]
+    },
+
+    {
+      "id": "education_loan",
+      "name": "Education Loan",
+      "benefits": [
+        "Loan up to Rs 3 crore",
+        "Flexible repayment options",
+        "Tax benefits under section 80E",
+        "Pre admission sanction"
+      ]
+    }
+  ],
+
+  "digital_banking": [
+    {
+      "id": "imobile",
+      "name": "iMobile",
+      "features": [
+        "Manage accounts investments credit cards and loans",
+        "Autopay and bill reminders",
+        "International and domestic money transfer",
+        "Expense tracking and budgeting",
+        "SmartLock fraud protection",
+        "iFinance all in one financial view",
+        "Mutual Funds OneView"
+      ]
+    }
+  ],
+
+  "forex": [
+    {
+      "id": "forex_prepaid_card",
+      "name": "Forex Prepaid Card",
+      "benefits": [
+        "Supports up to 15 currencies",
+        "Secure alternative to carrying cash",
+        "Preferential forex rates for Bank of America employees"
+      ]
+    }
+  ],
+
+  "family_banking": {
+    "benefits": [
+      "No minimum balance for linked accounts",
+      "Unlimited ATM transactions",
+      "Shared benefits for up to 5 family members",
+      "Airport lounge access based on spends",
+      "View and transact on behalf of family members with consent"
+    ]
+  }
 }
-]
