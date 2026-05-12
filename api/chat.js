@@ -1,3 +1,4 @@
+```javascript
 const systemPrompt =
 require('../knowledge/systemPrompt')
 
@@ -16,8 +17,7 @@ return res.status(200).end()
 
 if (req.method !== 'POST') {
 return res.status(405).json({
-success:false,
-message:'Method not allowed'
+success:false
 })
 }
 
@@ -25,12 +25,8 @@ try {
 
 const { messages } = req.body
 
-/* PRODUCT KNOWLEDGE */
-
 const productKnowledge =
 JSON.stringify(products)
-
-/* FINAL AI MESSAGES */
 
 const finalMessages = [
 
@@ -47,14 +43,14 @@ Available Banking Knowledge:
 
 ${productKnowledge}
 
-Instructions:
-- Use this banking knowledge intelligently
-- Recommend contextually
-- Do not dump all products together
-- Keep responses concise
-- Ask only ONE meaningful next question
-- Avoid long paragraphs
-- Sound premium and conversational
+Use this knowledge intelligently.
+
+Keep responses:
+- concise
+- premium
+- conversational
+
+Ask only ONE meaningful question at a time.
 
 `
 },
@@ -63,61 +59,44 @@ Instructions:
 
 ]
 
-/* CLOUDFLARE AI CALL */
-
 const response = await fetch(
-
-`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3-8b-instruct-fast`,
-
+'https://api.groq.com/openai/v1/chat/completions',
 {
 method:'POST',
 
 headers:{
 'Authorization':
-`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
+`Bearer ${process.env.GROQ_API_KEY}`,
 'Content-Type':'application/json'
 },
 
 body:JSON.stringify({
+
+model:'llama3-70b-8192',
+
 messages:finalMessages,
-max_tokens:180,
-temperature:0.7
+
+temperature:0.7,
+
+max_tokens:180
+
 })
 
 }
-
 )
 
 const data = await response.json()
-
-console.log('CLOUDFLARE RESPONSE:', data)
-
-if(!response.ok){
-
-return res.status(500).json({
-success:false,
-errors:[{
-message:
-data.errors?.[0]?.message ||
-'AI request failed'
-}]
-})
-
-}
 
 return res.status(200).json({
 success:true,
 result:{
 response:
-data.result?.response ||
-data.result?.text ||
+data.choices?.[0]?.message?.content ||
 'I could not generate a response.'
 }
 })
 
 }catch(error){
-
-console.log('SERVER ERROR:', error)
 
 return res.status(500).json({
 success:false,
@@ -129,3 +108,4 @@ message:error.message
 }
 
 }
+```
