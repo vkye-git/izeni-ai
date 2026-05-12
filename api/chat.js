@@ -29,7 +29,10 @@ leadData
 
 /* SEND LEAD TO GOOGLE SHEET */
 
-if(leadData){
+if(
+leadData &&
+process.env.GOOGLE_SHEET_WEBHOOK
+){
 
 try{
 
@@ -37,4 +40,23 @@ await fetch(
 process.env.GOOGLE_SHEET_WEBHOOK,
 {
 method:'POST',
+
+headers:{
+'Content-Type':'application/json'
+},
+
+body:JSON.stringify(leadData)
+
+}
+)
+
+}catch(sheetError){
+
+console.log(
+'SHEET ERROR:',
+sheetError
+)
+
+}
+
 }
