@@ -1,5 +1,8 @@
-import systemPrompt from '../knowledge/systemPrompt.js'
-import products from '../knowledge/products.json' assert { type: 'json' }
+const systemPrompt =
+require('../knowledge/systemPrompt')
+
+const products =
+require('../knowledge/products.json')
 
 export default async function handler(req, res) {
 
@@ -24,9 +27,10 @@ const { messages } = req.body
 
 /* PRODUCT KNOWLEDGE */
 
-const productKnowledge = JSON.stringify(products)
+const productKnowledge =
+JSON.stringify(products)
 
-/* FINAL MESSAGES */
+/* FINAL AI MESSAGES */
 
 const finalMessages = [
 
@@ -59,15 +63,18 @@ Instructions:
 
 ]
 
-/* CLOUDFLARE AI */
+/* CLOUDFLARE AI CALL */
 
 const response = await fetch(
+
 `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3-8b-instruct-fast`,
+
 {
 method:'POST',
 
 headers:{
-'Authorization':`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
+'Authorization':
+`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
 'Content-Type':'application/json'
 },
 
@@ -78,6 +85,7 @@ temperature:0.7
 })
 
 }
+
 )
 
 const data = await response.json()
