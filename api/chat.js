@@ -44,9 +44,11 @@ ${productKnowledge}
 
 Instructions:
 - Keep responses concise
-- Ask one question at a time
+- Ask only ONE meaningful question at a time
 - Sound premium and conversational
 - Recommend contextually
+- Avoid long paragraphs
+- Continue conversation naturally
 
 `
 },
@@ -68,7 +70,7 @@ headers:{
 
 body:JSON.stringify({
 
-model:'llama3-70b-8192',
+model:'llama-3.1-8b-instant',
 
 messages:finalMessages,
 
@@ -88,13 +90,28 @@ console.log(
 JSON.stringify(data, null, 2)
 )
 
+/* HANDLE API ERRORS */
+
+if(data.error){
+
+return res.status(500).json({
+success:false,
+errors:[{
+message:data.error.message
+}]
+})
+
+}
+
+/* SUCCESS RESPONSE */
+
 return res.status(200).json({
 success:true,
 result:{
 response:
 data?.choices?.[0]?.message?.content ||
 data?.choices?.[0]?.text ||
-'I could not generate a response.'
+'No response generated.'
 }
 })
 
