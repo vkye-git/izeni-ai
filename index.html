@@ -399,7 +399,7 @@ fullName:''
 
 let userProfile = {
 name:'',
-  mobile:'',
+mobile:'',
 selectedJourney:'',
 persona:'',
 existingBank:'',
@@ -630,13 +630,20 @@ headers:{
 
 body:JSON.stringify({
 messages:conversationHistory,
+
 leadData:{
 name:userProfile.name,
-  mobile:userProfile.mobile,
+mobile:userProfile.mobile,
 journey:userProfile.selectedJourney,
 query:text,
-persona:userProfile.persona
+persona:userProfile.persona,
+
+leadType:
+userProfile.mobile
+? 'Qualified Lead'
+: 'Soft Lead'
 }
+  
 })
 
 }
