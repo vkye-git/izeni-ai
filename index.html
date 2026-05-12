@@ -387,17 +387,28 @@ Send
 
 const API_URL = 'https://izeni-ai.vercel.app/api/chat'
 
-/* CONVERSATION STATE */
+/* ONBOARDING STATE */
 
 let onboardingState = {
 started:false,
 nameCollected:false,
-fullName:'',
-personaCollected:false,
-persona:''
+fullName:''
 }
 
-/* MEMORY */
+/* USER PROFILE MEMORY */
+
+let userProfile = {
+name:'',
+selectedJourney:'',
+existingBank:'',
+investmentInterest:'',
+travelFrequency:'',
+preferredCardType:'',
+salaryRange:'',
+riskProfile:''
+}
+
+/* CONVERSATION MEMORY */
 
 let conversationHistory = []
 
@@ -412,7 +423,7 @@ behavior:'smooth'
 
 }
 
-/* NAME VALIDATION */
+/* VALIDATE NAME */
 
 function validateFullName(name){
 
@@ -459,7 +470,7 @@ grid.style.display='none'
 
 }
 
-/* STARTER CARD */
+/* STARTER CARD CLICK */
 
 function selectStarter(text){
 
@@ -467,13 +478,18 @@ hideStarterCards()
 
 onboardingState.started = true
 
+/* SAVE JOURNEY */
+
+userProfile.selectedJourney = text
+
 addUserMessage(text)
 
 setTimeout(()=>{
 
 addBotMessage(
-`Great choice ✨
-Before we personalise your ideal banking setup, what should I call you?
+`Great choice ✨<br><br>
+
+Before we personalise your ideal banking setup, what should I call you?<br><br>
 
 (Please enter your full name.)`
 )
@@ -560,15 +576,37 @@ typing.remove()
 
 }
 
-/* SEND TO AI */
+/* SEND MESSAGE TO AI */
 
 async function sendMessage(text){
 
 addTyping()
 
+/* ENRICHED MEMORY CONTEXT */
+
+const enrichedPrompt = `
+
+User Profile:
+${JSON.stringify(userProfile)}
+
+Conversation Context:
+- User selected journey:
+${userProfile.selectedJourney}
+
+User Message:
+${text}
+
+Instructions:
+- Respond conversationally
+- Keep response concise
+- Ask only ONE meaningful next question
+- Avoid long paragraphs
+- Sound premium and intelligent
+`
+
 conversationHistory.push({
 role:'user',
-content:text
+content:enrichedPrompt
 })
 
 try{
@@ -626,6 +664,8 @@ data.errors[0].message ||
 JSON.stringify(data.errors)
 
 }
+
+/* SAVE AI RESPONSE */
 
 conversationHistory.push({
 role:'assistant',
@@ -689,7 +729,7 @@ if(!validName){
 setTimeout(()=>{
 
 addBotMessage(
-`Could you please enter your full name?
+`Could you please enter your full name?<br><br>
 
 Both first and last name should be more meaningful 🙂`
 )
@@ -700,8 +740,12 @@ return
 
 }
 
+/* SAVE NAME */
+
 onboardingState.nameCollected = true
 onboardingState.fullName = text
+
+userProfile.name = text
 
 const firstName =
 text.split(' ')[0]
@@ -709,10 +753,11 @@ text.split(' ')[0]
 setTimeout(()=>{
 
 addBotMessage(
-`Lovely to meet you, ${firstName} ✨
+`Lovely to meet you, ${firstName} ✨<br><br>
 
-Do you already have an ICICI Bank Salary Account? I’ll tailor recommendations accordingly.
-`
+To help me craft a smarter banking and investment setup for you, may I quickly understand your current banking situation?<br><br>
+
+Do you already use ICICI as your primary salary account?`
 )
 
 },600)
@@ -721,45 +766,7 @@ return
 
 }
 
-/* STEP 2 — PERSONA COLLECTION */
-
-if(
-onboardingState.nameCollected &&
-!onboardingState.personaCollected
-){
-
-onboardingState.personaCollected = true
-onboardingState.persona = text
-
-const firstName =
-onboardingState.fullName.split(' ')[0]
-
-const enhancedPrompt = `
-User Name: ${onboardingState.fullName}
-
-User Persona:
-${text}
-
-User Query:
-Help me choose the right banking setup.
-
-Please respond:
-- conversationally
-- briefly
-- intelligently
-- in premium advisory tone
-- ask only ONE meaningful next question
-- avoid long paragraphs
-- avoid generic explanations
-`
-
-sendMessage(enhancedPrompt)
-
-return
-
-}
-
-/* NORMAL FLOW */
+/* NORMAL AI FLOW */
 
 sendMessage(text)
 
