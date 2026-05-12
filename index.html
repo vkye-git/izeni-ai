@@ -366,6 +366,22 @@ Send
 
 const API_URL = 'https://izeni-ai.vercel.app/api/chat'
 
+/* CONVERSATION STATE */
+
+let onboardingState = {
+started:false,
+nameCollected:false,
+fullName:'',
+personaCollected:false,
+persona:''
+}
+
+/* MEMORY */
+
+let conversationHistory = []
+
+/* SCROLL */
+
 function scrollBottom(){
 
 window.scrollTo({
@@ -375,9 +391,43 @@ behavior:'smooth'
 
 }
 
+/* NAME VALIDATION */
+
+function validateFullName(name){
+
+const trimmed = name.trim()
+
+const parts = trimmed.split(/\s+/)
+
+if(parts.length < 2){
+return false
+}
+
+for(let part of parts){
+
+if(part.length < 2){
+return false
+}
+
+if(!/^[a-zA-Z]+$/.test(part)){
+return false
+}
+
+}
+
+return true
+
+}
+
+/* HIDE STARTER CARDS */
+
 function hideStarterCards(){
 
 const grid=document.getElementById('starterGrid')
+
+if(!grid){
+return
+}
 
 grid.style.opacity='0'
 grid.style.transform='translateY(10px)'
@@ -388,13 +438,31 @@ grid.style.display='none'
 
 }
 
+/* STARTER CARD */
+
 function selectStarter(text){
 
 hideStarterCards()
 
-sendMessage(text)
+onboardingState.started = true
+
+addUserMessage(text)
+
+setTimeout(()=>{
+
+addBotMessage(
+`Great choice ✨
+
+Before we personalise your ideal banking setup, what should I call you?
+
+(Please enter your full name.)`
+)
+
+},500)
 
 }
+
+/* USER MESSAGE */
 
 function addUserMessage(text){
 
@@ -412,6 +480,8 @@ scrollBottom()
 
 }
 
+/* BOT MESSAGE */
+
 function addBotMessage(text){
 
 const chat=document.getElementById("chatWindow")
@@ -427,6 +497,8 @@ ${text}
 scrollBottom()
 
 }
+
+/* THINKING */
 
 function addTyping(){
 
@@ -456,6 +528,8 @@ scrollBottom()
 
 }
 
+/* REMOVE THINKING */
+
 function removeTyping(){
 
 const typing=document.getElementById("typingBubble")
@@ -466,11 +540,16 @@ typing.remove()
 
 }
 
+/* SEND TO AI */
+
 async function sendMessage(text){
 
-addUserMessage(text)
-
 addTyping()
+
+conversationHistory.push({
+role:'user',
+content:text
+})
 
 try{
 
@@ -491,14 +570,7 @@ headers:{
 
 body:JSON.stringify({
 
-messages:[
-
-{
-role:'user',
-content:text
-}
-
-]
+messages:conversationHistory
 
 })
 
@@ -535,6 +607,20 @@ JSON.stringify(data.errors)
 
 }
 
+conversationHistory.push({
+role:'assistant',
+content:reply
+})
+
+/* LIMIT MEMORY */
+
+if(conversationHistory.length > 12){
+
+conversationHistory =
+conversationHistory.slice(-12)
+
+}
+
 addBotMessage(reply)
 
 }catch(error){
@@ -549,21 +635,122 @@ addBotMessage("Unable to reach iZeni right now.")
 
 }
 
+/* MAIN INPUT FLOW */
+
 function submitInput(){
 
 hideStarterCards()
 
-const input=document.getElementById('userInput')
+const input =
+document.getElementById('userInput')
 
-if(input.value.trim() !== ''){
+const text = input.value.trim()
 
-sendMessage(input.value)
+if(text === ''){
+return
+}
+
+addUserMessage(text)
 
 input.value=''
 
-}
+/* STEP 1 — NAME COLLECTION */
+
+if(
+onboardingState.started &&
+!onboardingState.nameCollected
+){
+
+const validName =
+validateFullName(text)
+
+if(!validName){
+
+setTimeout(()=>{
+
+addBotMessage(
+`Could you please enter your full name?
+
+Both first and last name should be more meaningful 🙂`
+)
+
+},500)
+
+return
 
 }
+
+onboardingState.nameCollected = true
+onboardingState.fullName = text
+
+const firstName =
+text.split(' ')[0]
+
+setTimeout(()=>{
+
+addBotMessage(
+`Lovely to meet you, ${firstName} ✨
+
+To help me personalise your experience, which best describes you today?
+
+• Salaried professional
+• Frequent traveller
+• Wealth builder / investor
+• Premium lifestyle focused
+• Just starting financial planning`
+)
+
+},600)
+
+return
+
+}
+
+/* STEP 2 — PERSONA COLLECTION */
+
+if(
+onboardingState.nameCollected &&
+!onboardingState.personaCollected
+){
+
+onboardingState.personaCollected = true
+onboardingState.persona = text
+
+const firstName =
+onboardingState.fullName.split(' ')[0]
+
+const enhancedPrompt = `
+User Name: ${onboardingState.fullName}
+
+User Persona:
+${text}
+
+User Query:
+Help me choose the right banking setup.
+
+Please respond:
+- conversationally
+- briefly
+- intelligently
+- in premium advisory tone
+- ask only ONE meaningful next question
+- avoid long paragraphs
+- avoid generic explanations
+`
+
+sendMessage(enhancedPrompt)
+
+return
+
+}
+
+/* NORMAL FLOW */
+
+sendMessage(text)
+
+}
+
+/* ENTER KEY */
 
 function handleKey(e){
 
