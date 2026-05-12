@@ -83,30 +83,24 @@ max_tokens:180
 
 const data = await response.json()
 
-console.log(data)
-
-  console.log(
+console.log(
 'GROQ RESPONSE:',
 JSON.stringify(data, null, 2)
 )
-  
+
 return res.status(200).json({
 success:true,
 result:{
 response:
-  
-response:
-data.choices?.[0]?.message?.content ||
-data.choices?.[0]?.text ||
-JSON.stringify(data)
-
-  
+data?.choices?.[0]?.message?.content ||
+data?.choices?.[0]?.text ||
+'I could not generate a response.'
 }
 })
 
 }catch(error){
 
-console.log(error)
+console.log('SERVER ERROR:', error)
 
 return res.status(500).json({
 success:false,
