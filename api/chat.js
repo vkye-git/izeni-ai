@@ -1,16 +1,6 @@
-# Full Updated `api/chat.js` (Step 4 Included)
+import systemPrompt from '../knowledge/systemPrompt.js'
+import products from '../knowledge/products.json' assert { type: 'json' }
 
-Replace your ENTIRE existing:
-
-```plaintext
-api/chat.js
-```
-
-file with this complete updated code.
-
----
-
-  
 export default async function handler(req, res) {
 
 res.setHeader('Access-Control-Allow-Origin', '*')
@@ -20,20 +10,6 @@ res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 if (req.method === 'OPTIONS') {
 return res.status(200).end()
 }
-
-if (req.method !== 'POST') {
-return res.status(405).json({
-success:false,
-message:'Method not allowed'
-})
-}
-  
-  
-```javascript
-const systemPrompt = require('../knowledge/systemPrompt')
-const products = require('../knowledge/products.json')
-
-export default async function handler(req, res) {
 
 if (req.method !== 'POST') {
 return res.status(405).json({
@@ -83,21 +59,24 @@ Instructions:
 
 ]
 
-/* CLOUDFLARE AI CALL */
+/* CLOUDFLARE AI */
 
 const response = await fetch(
 `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3-8b-instruct-fast`,
 {
 method:'POST',
+
 headers:{
 'Authorization':`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
 'Content-Type':'application/json'
 },
+
 body:JSON.stringify({
 messages:finalMessages,
 max_tokens:180,
 temperature:0.7
 })
+
 }
 )
 
@@ -110,7 +89,9 @@ if(!response.ok){
 return res.status(500).json({
 success:false,
 errors:[{
-message:data.errors?.[0]?.message || 'AI request failed'
+message:
+data.errors?.[0]?.message ||
+'AI request failed'
 }]
 })
 
@@ -140,31 +121,3 @@ message:error.message
 }
 
 }
-```
-
----
-
-# ALSO ENSURE THESE FILES EXIST
-
-## 1. `knowledge/systemPrompt.js`
-
-## 2. `knowledge/products.json`
-
----
-
-# AFTER PASTING
-
-Do this:
-
-1. Save file
-2. Commit changes to GitHub
-3. Wait for Vercel redeploy
-4. Refresh your site
-
-Then:
-
-✅ products knowledge starts working
-✅ AI becomes more contextual
-✅ recommendations improve
-✅ hallucinations reduce
-✅ banking setup conversations become smarter
