@@ -399,6 +399,7 @@ fullName:''
 
 let userProfile = {
 name:'',
+  mobile:'',
 selectedJourney:'',
 persona:'',
 existingBank:'',
@@ -631,6 +632,7 @@ body:JSON.stringify({
 messages:conversationHistory,
 leadData:{
 name:userProfile.name,
+  mobile:userProfile.mobile,
 journey:userProfile.selectedJourney,
 query:text,
 persona:userProfile.persona
